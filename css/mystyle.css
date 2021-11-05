@@ -2,7 +2,7 @@
   body {
     background-color: #FFFFFF;
     /* needed to set this because of fixed-top for nav */
-    padding-top: 15rem;
+    padding-top: 14rem;
   }
 
   a {
@@ -24,7 +24,7 @@
   .nav-custom {
     margin-left: 2em;
     margin-right: 2em;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
   }
 
@@ -77,17 +77,39 @@
     display: none;
   }
 
+  .list-group-item{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+  }
   
-  /* when screen width size below 992px
-     hide center search form and show inside search form */
+
+  /* when screen width size below 992px*/
   @media screen and (max-width: 992px) {
 
+        /*change padding-top due to autohide 2nd navi*/
+        body{
+          padding-top: 12rem;
+        }
+        
+        /*hide center search form and show inside search form*/
         .user-search, .search-button  {
           display: none;
         }
 
         .user-search-inside, .search-button-inside {
           display: block;
+        }
+
+        /* for list-group-item padding */
+        .list-group{
+            padding-bottom: 2rem;
+        }
+
+        /*all content in footer center*/
+        .footer-narrow{
+          text-align: center;
         }
 
 
