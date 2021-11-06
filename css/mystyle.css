@@ -126,3 +126,20 @@
 .form-group > label {
   font-size: 20px;
 }
+
+/* Checkout button */
+.btn-default {
+    background-color: #1e2832;
+    color: #FFFFFF;
+}
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active    {
+        background-color: #283541;
+        color: #FFFFFF;
+    }
+
+.checkout-custom{
+  padding-top: 5em;
+  padding-bottom: 10em;
+}
