@@ -92,6 +92,10 @@
         body{
           padding-top: 12rem;
         }
+
+        .navbar{
+          flex-wrap: nowrap;
+        }        
         
         /*hide center search form and show inside search form*/
         .user-search, .search-button  {
