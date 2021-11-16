@@ -147,3 +147,14 @@
   padding-top: 5em;
   padding-bottom: 10em;
 }
+
+
+#pwd-require {
+  font-size: 13px;
+}
+
+.result-custom {
+  text-align: center;
+  color: red; 
+  font-weight: bold;
+}
