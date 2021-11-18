@@ -4,11 +4,11 @@
   <div class="container">
     <div class="main d-flex justify-content-center">
       <div class="row login-custom">
-        <h2>LOG IN</h2>
+        <h2>Log In</h2>
         <div class="card m-2 p-4">
           <div class="card-body m-4">
               <div id="info"></div>
-                <form id="login-form">
+                <form role="form" action="/login" method="post">
                   <div class="form-group">
                     <label>Email</label>
                     <input class="form-control form-control-lg" type="email" name="username" id="username" placeholder="Enter your email" required />
@@ -39,7 +39,6 @@
     </div>
   </div>
 
-<script src="/javascripts/log-in.js"></script>
 
 <%- include ('partials/footer') %>
 

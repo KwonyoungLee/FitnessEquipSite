@@ -6,7 +6,9 @@ var Account = new Schema({
 	username : String,
 	first_name: String,
 	last_name: String,   
-	date_of_birth: Date
+	date_of_birth: Date,
+	billing_address: String,
+	shipping_address: String
 });
 
 Account.plugin(passportLocalMongoose);
