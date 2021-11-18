@@ -12,18 +12,16 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 
-//var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
 var mainRouter = require('./routes/main');
-
 var customersRouter = require('./routes/customers');
 var equipmentRouter = require('./routes/equipment');
-var ordersRouter = require('./routes/orders')
+//var usersRouter = require('./routes/users');
+//var ordersRouter = require('./routes/orders')
 
 var app = express();
 
 // mongoose
-mongoose.connect('mongodb://localhost:27017/Stronger');
+mongoose.connect('mongodb://127.0.0.1:27017/Stronger');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,12 +54,10 @@ passport.deserializeUser(Account.deserializeUser());
 
 
 app.use('/', mainRouter);
-//app.use('/index', indexRouter);
-//app.use('/users', usersRouter);
-
 app.use('/customers',customersRouter)
 app.use('/api/equipment',equipmentRouter)
-app.use('/orders',ordersRouter)
+//app.use('/orders',ordersRouter)
+//app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
