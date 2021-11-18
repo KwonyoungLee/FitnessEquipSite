@@ -13,10 +13,11 @@ var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var mainRouter = require('./routes/main');
 
 var customersRouter = require('./routes/customers');
 var equipmentRouter = require('./routes/equipment');
-var ordersRouter = require('./routes/orders')
+//var ordersRouter = require('./routes/orders')
 
 var app = express();
 
@@ -53,11 +54,12 @@ passport.deserializeUser(Account.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/main', mainRouter);
 
 
 app.use('/customers',customersRouter)
 app.use('/api/equipment',equipmentRouter)
-app.use('/orders',ordersRouter)
+//app.use('/orders',ordersRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
