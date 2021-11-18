@@ -32,10 +32,9 @@ collection.insert(
     image : req.body.image,
     quantity_in_stock : req.body.quantity_in_stock,
     deleted: "0"
-  },function(err,video){
+  },function(err,equipment){
     if (err) throw err;
-    //if insert is succcessful, callback function will return the new video object
-    res.json(video)
+    res.json(equipment)
   })
 })
 
@@ -46,10 +45,9 @@ router.delete('/:id',function(req,res,next){
       deleted : "1"
     }
   }
-  ,function(err,video){
+  ,function(err,equipment){
     if (err) throw err;
-    //if insert is succcessful, callback function will return the new video object
-    res.json(video);
+    res.json(equipment);
   })
 })
 
@@ -66,10 +64,9 @@ router.post('/:id/update',function(req,res,next){
       deleted : "0"
     }
   }
-  ,function(err,video){
+  ,function(err,equipment){
     if (err) throw err;
-    //if insert is succcessful, callback function will return the new video object
-    res.json(video)
+    res.json(equipment)
   })
 })
 
