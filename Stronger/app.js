@@ -11,8 +11,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var indexRouter = require('./routes/index');
+//var usersRouter = require('./routes/users');
 var mainRouter = require('./routes/main');
 
 var customersRouter = require('./routes/customers');
@@ -52,10 +52,9 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/main', mainRouter);
-
+app.use('/', mainRouter);
+//app.use('/index', indexRouter);
+//app.use('/users', usersRouter);
 
 app.use('/customers',customersRouter)
 app.use('/api/equipment',equipmentRouter)
