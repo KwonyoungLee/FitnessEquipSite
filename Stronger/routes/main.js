@@ -52,7 +52,7 @@ router.post('/signup', function(req, res) {
           return res.render('sign-up', { account : account });
       }
 
-      passport.authenticate('local')(req, res, function () {
+      passport.authenticate('local', {successFlash: 'Welcome!'})(req, res, function () {
         res.redirect('/');
       });
   });
