@@ -12,18 +12,11 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 
-<<<<<<< HEAD
-// var customersRouter = require('./routes/customers');
-// var equipmentRouter = require('./routes/equipment');
-var ordersRouter = require('./routes/orders')
-// var categoriesRouter = require('./routes/categories')
-=======
 var mainRouter = require('./routes/main');
 var customersRouter = require('./routes/customers');
 var equipmentRouter = require('./routes/equipment');
 //var usersRouter = require('./routes/users');
 //var ordersRouter = require('./routes/orders')
->>>>>>> ec581d81afa76bf7c5039b3e6d7e5432607cbdbc
 
 var app = express();
 

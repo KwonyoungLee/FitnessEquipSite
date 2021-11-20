@@ -15,10 +15,6 @@
     "express-session": "^1.17.2",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-<<<<<<< HEAD
-    "monk": "^7.3.4",
-    "morgan": "~1.9.1"
-=======
     "lodash": "^4.17.21",
     "method-override": "^3.0.0",
     "mongoose": "^6.0.13",
@@ -27,6 +23,5 @@
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0"
->>>>>>> ec581d81afa76bf7c5039b3e6d7e5432607cbdbc
   }
 }
