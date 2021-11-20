@@ -64,6 +64,10 @@ router.get('/equipment', function(req, res, next) {
   res.render('equipment-page', { user : req.user, message: req.flash()  });
 });
 
+/* GET equipment page. */
+router.get('/equipment/:id', function(req, res, next) {
+  res.render('equipment-page', { user : req.user, message: req.flash(), id : req.params.id });
+});
 
 /* GET user-history page. */
 router.get('/user-history', function(req, res, next) {

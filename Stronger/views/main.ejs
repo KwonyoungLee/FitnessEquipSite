@@ -2,18 +2,23 @@
   <html lang="en">
   <head>
     <%- include ('partials/header') %>
+    <link href ="/stylesheets/main.css" rel="stylesheet">
+    <script src="/javascripts/main.js"></script>
   </head>
   <body>
     <%- include ('partials/navbar') %>
 
-   <!-- Main -->
-  <div class="row">
-    <img src="images/workout-main.jpg" alt="workout main">
-  </div>
+    <!-- Main -->
+    <div class="container">
+      <div class="d-flex flex-column">
+        <div class= "row" id="equipment-card-area">
+        </div>
+      </div>
+    </div>
 
     <footer>
       <%- include ('partials/footer') %>
     </footer>
 
   </body>
-</html>
+  </html>
