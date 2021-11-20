@@ -16,7 +16,7 @@ var mainRouter = require('./routes/main');
 var customersRouter = require('./routes/customers');
 var equipmentRouter = require('./routes/equipment');
 //var usersRouter = require('./routes/users');
-var ordersRouter = require('./routes/orders')
+//var ordersRouter = require('./routes/orders')
 
 var app = express();
 
@@ -53,18 +53,11 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 
-<<<<<<< HEAD
-// app.use('/customers',customersRouter)
-// app.use('/equipment',equipmentRouter)
-app.use('/orders',ordersRouter)
-// app.use('/categories',categoriesRouter)
-=======
 app.use('/', mainRouter);
 app.use('/customers',customersRouter)
 app.use('/api/equipment',equipmentRouter)
-//app.use('/orders',ordersRouter)
+app.use('/orders',ordersRouter)
 //app.use('/users', usersRouter);
->>>>>>> ec581d81afa76bf7c5039b3e6d7e5432607cbdbc
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
