@@ -1,0 +1,67 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+    <%- include ('partials/header') %>
+  </head>
+  <body>
+  <%- include ('partials/navbar') %>
+
+ <div class="container">
+    <div class="main d-flex justify-content-center">
+      <div class="row signin-custom">
+        <h2>Sign Up</h2>
+        <div class="card m-2 p-4">
+          <div class="card-body m-4">
+              <div id="info"></div>
+                <form role="form" action="/signup" method="post">
+                  <div class="row g-4">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>First Name</label>
+                          <input class="form-control form-control-lg" type="text" name="fname" id="fname" pattern="[a-zA-Z]+" placeholder="First name" required /> 
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input class="form-control form-control-lg" type="text" name="lname" id="lname" pattern="[a-zA-Z]+" placeholder="Last name" required />  
+                      </div>
+                    </div>    
+                  </div>                               
+                  <div class="form-group mt-3">
+                    <label>Email</label>
+                    <input class="form-control form-control-lg" type="email" name="username" id="username" placeholder="Enter your email" required />
+                  </div>
+                  <div class="form-group mt-3">
+                    <label>Password</label>
+                    <input class="form-control form-control-lg" type="password" name="password" id="password" placeholder="Enter your password" required />
+                    <p id="pwd-require"><b>* Password must:</b><br> use 8 or more characters with mix of upper and lower letters, numbers, and symbols</p>
+                  </div>
+                  <div class="form-group mt-3">
+                    <label>Password Confirm</label>
+                    <input class="form-control form-control-lg" type="password" name="confirmpwd" id="confirmpwd" placeholder="Re-enter your password" required />
+                  </div>
+                  <div class="form-group mt-3">
+                    <label>Date of Birth</label>
+                    <input class="form-control form-control-lg" type="date" name="dob" id="dob" placeholder="MM-DD-YYYY" required />
+                  </div>
+                  <div id="signup_result" class="result-custom m-4">
+                  </div>
+                  <div class="text-center mt-3">
+                    <button type="submit" id="btn_signin" class="btn btn-lg btn-primary">Create an Account</button>
+                  </div>
+                  <br>
+                </form> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <footer>
+      <%- include ('partials/footer') %>
+    </footer>
+
+  </body>
+</html>
+    

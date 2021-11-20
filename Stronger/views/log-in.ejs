@@ -1,0 +1,61 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+    <%- include ('partials/header') %>
+  </head>
+  <body>
+    <%- include ('partials/navbar') %>
+  <!-- Log in -->
+  <div class="container">
+    <div class="main d-flex justify-content-center">
+      <div class="row login-custom">
+        <h2>Log In</h2>
+        <div class="card m-2 p-4">
+                 <!-- Basic Error Message -->
+                 <% if (message.error) {%>
+                  <div class="error-message">
+                    <p class="error-text"><%=message.error %></p>
+                  </div>
+                  <% } %>
+          <div class="card-body m-4">
+
+                <form role="form" action="/login" method="post">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control form-control-lg" type="email" name="username" id="username" placeholder="Enter your email" required />
+                  </div>
+                  <div class="form-group mt-3">
+                    <label>Password</label>
+                    <input class="form-control form-control-lg" type="password" name="password" id="password" placeholder="Enter your password" required />
+                  </div>
+                  <br>
+                  <div class="text-center mt-3">
+                    <button type="submit" id="btn_login" class="btn btn-lg btn-primary">Login</button>
+                  </div>
+                  <div id="login_result" class="result-custom m-4">
+                  </div>
+                  <div class="text-center">
+                    <medium>
+                      <a href=#>Forgot password?</a>
+                    </medium>
+                    <br>
+                    <medium>
+                      <a href="/signup">Create account</a>
+                    </medium>
+                  </div>
+                </form> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer>
+      <%- include ('partials/footer') %>
+    </footer>
+
+  </body>
+</html>
+
+
+

@@ -3,34 +3,75 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var flash = require('connect-flash');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//user authentication
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
 
+<<<<<<< HEAD
 // var customersRouter = require('./routes/customers');
 // var equipmentRouter = require('./routes/equipment');
 var ordersRouter = require('./routes/orders')
 // var categoriesRouter = require('./routes/categories')
+=======
+var mainRouter = require('./routes/main');
+var customersRouter = require('./routes/customers');
+var equipmentRouter = require('./routes/equipment');
+//var usersRouter = require('./routes/users');
+//var ordersRouter = require('./routes/orders')
+>>>>>>> ec581d81afa76bf7c5039b3e6d7e5432607cbdbc
 
 var app = express();
 
+// mongoose
+mongoose.connect('mongodb://127.0.0.1:27017/Stronger');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//user authentication
+app.use(session({ 
+  secret: 'this-is-a-secret-token',
+  resave: true,
+  saveUninitialized: true
+ }));
+app.use(passport.initialize());
+app.use(passport.session());
 
+// passport config
+var Account = require('./models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+
+<<<<<<< HEAD
 // app.use('/customers',customersRouter)
 // app.use('/equipment',equipmentRouter)
 app.use('/orders',ordersRouter)
 // app.use('/categories',categoriesRouter)
+=======
+app.use('/', mainRouter);
+app.use('/customers',customersRouter)
+app.use('/api/equipment',equipmentRouter)
+//app.use('/orders',ordersRouter)
+//app.use('/users', usersRouter);
+>>>>>>> ec581d81afa76bf7c5039b3e6d7e5432607cbdbc
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

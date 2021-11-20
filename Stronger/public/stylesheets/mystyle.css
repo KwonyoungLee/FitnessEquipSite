@@ -92,6 +92,10 @@
         body{
           padding-top: 12rem;
         }
+
+        .navbar{
+          flex-wrap: nowrap;
+        }        
         
         /*hide center search form and show inside search form*/
         .user-search, .search-button  {
@@ -142,4 +146,36 @@
 .checkout-custom{
   padding-top: 5em;
   padding-bottom: 10em;
+}
+
+
+#pwd-require {
+  font-size: 13px;
+}
+
+.result-custom {
+  text-align: center;
+  color: red; 
+  font-weight: bold;
+}
+
+.error-message {
+  background-color: #fce4e4;
+  border: 1px solid #fcc2c3;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.error-text {
+  color: #cc0033;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+.success-text {
+  margin-top: 13px;
+  font-size: 15px;
+  font-weight: bold;
 }
