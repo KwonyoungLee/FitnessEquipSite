@@ -52,10 +52,6 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 073b189ac7c0eaf2a309c89ce5732ae7a9420d66
 app.use('/', mainRouter);
 app.use('/customers',customersRouter)
 app.use('/api/equipment',equipmentRouter)
