@@ -39,6 +39,7 @@ router.get('/:id', function(req, res) {
   router.post('/', function(req, res) {
     collection.insert({
       customer_id: req.body.customer_id,
+      customer_username: req.body.customer_username,
       order: req.body.order, 
       total_price: req.body.total_price,
       date: req.body.date
