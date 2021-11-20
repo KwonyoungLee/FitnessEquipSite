@@ -2,16 +2,38 @@
   <html lang="en">
   <head>
     <%- include ('partials/header') %>
+    <script src="/javascripts/equipment-page.js"></script>
+    <link href="/stylesheets/equipment-page.css">
+    <script>
+      var equipment_id = "<%= id %>"
+    </script>
   </head>
   <body>
     <%- include ('partials/navbar') %>
     <!-- Specific Equipment Information-->
-    <div class="row">
-    </div>
-
-    <footer>
-      <%- include ('partials/footer') %>
-    </footer>
-
-  </body>
-</html>
+    <div class="container ">
+      <div class="row mt-5 mb-5">
+        <div class="col-md-8">
+          <img class = "mx-auto d-block" id="equipment-img" src="" alt="">
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 25rem;">
+            <div class="card-body">
+              <h3 id="equipment-name" class="card-title"></h3>
+              <p id="equipment-price" class="card-text"></p>
+              <p id="equipment-description" class="card-text"></p>
+              <a href="#" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+                Add To Cart
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <%- include ('partials/footer') %>
+      </footer>
+    </body>
+    </html>

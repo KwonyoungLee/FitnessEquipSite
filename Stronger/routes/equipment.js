@@ -4,6 +4,7 @@ var monk = require('monk');
 
 var methodOverride = require('method-override')
 router.use(methodOverride('_method'));
+var lodash = require("lodash");
 
 var db = monk('127.0.0.1:27017/Stronger')
 var collection = db.get('Equipment');
