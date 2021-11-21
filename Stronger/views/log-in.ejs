@@ -12,17 +12,18 @@
         <h2>Log In</h2>
         <div class="card m-2 p-4">
                  <!-- Basic Error Message -->
-                 <% if (message.error) {%>
+                 <% if (locals.message){
+                    if (message.error) {%>
                   <div class="error-message">
                     <p class="error-text"><%=message.error %></p>
                   </div>
-                  <% } %>
+                  <% } }%>
           <div class="card-body m-4">
 
-                <form role="form" action="/login" method="post">
+                <form role="form" action="/customers/login" method="post">
                   <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control form-control-lg" type="email" name="username" id="username" placeholder="Enter your email" required />
+                    <input class="form-control form-control-lg" type="text" name="username" id="username" placeholder="Enter your email" required />
                   </div>
                   <div class="form-group mt-3">
                     <label>Password</label>
@@ -40,7 +41,7 @@
                     </medium>
                     <br>
                     <medium>
-                      <a href="/signup">Create account</a>
+                      <a href="/customers/signup">Create account</a>
                     </medium>
                   </div>
                 </form> 
