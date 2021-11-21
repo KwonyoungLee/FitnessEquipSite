@@ -3,6 +3,8 @@
 
 <head>
   <%- include ('partials/header') %>
+  <script src="/javascripts/checkout.js"></script>
+
 </head>
 
 <body>
@@ -19,11 +21,11 @@
 
           <!-- Shipping Info -->
           <h2 class="mb-3">Enter Your Shipping Address</h2>
-          <form>
+          <form action="/confirmation">
             <div class="form-group">
               <label>Country/Region</label>
 
-              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <select id="ship_country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 <option selected>United States</option>
                 <option value="1">01</option>
                 <option value="2">02</option>
@@ -32,33 +34,33 @@
             </div>
             <div class="form-group">
               <label>Full Name (First and Last name)</label>
-              <input class="form-control form-control-lg mb-2" type="text" name="name" id="name" required />
+              <input class="form-control form-control-lg mb-2" type="text" name="name" id="ship_name" required />
             </div>
             <div class="form-group">
               <label>Address</label>
-              <input class="form-control form-control-lg mb-2" type="text" name="address" id="address" required />
+              <input class="form-control form-control-lg mb-2" type="text" name="ship_address" id="address" required />
             </div>
             <div class="form-group">
               <label>Apt/Suite/Other (optional)</label>
-              <input class="form-control form-control-lg mb-2" type="text" name="apt" id="apt" />
+              <input class="form-control form-control-lg mb-2" type="text" name="apt" id="ship_apt" />
             </div>
             <div class="row g-4">
               <div class="col">
                 <div class="form-group">
                   <label>Zip code</label>
-                  <input class="form-control form-control-lg mb-2" type="text" name="zip" id="zip" required />
+                  <input class="form-control form-control-lg mb-2" type="text" name="zip" id="ship_zip" required />
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label>City</label>
-                  <input class="form-control form-control-lg mb-2" type="text" name="city" id="city" required />
+                  <input class="form-control form-control-lg mb-2" type="text" name="city" id="ship_city" required />
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label>State</label>
-              <select class="form-select form-select-lg mb-5" aria-label=".form-select-lg example">
+              <select id="ship_state" class="form-select form-select-lg mb-5" aria-label=".form-select-lg example">
                 <option selected>TX</option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
@@ -77,7 +79,7 @@
               <div class="form-group">
                 <label>Country/Region</label>
 
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select id="bill_country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                   <option selected>United States</option>
                   <option value="1">01</option>
                   <option value="2">02</option>
@@ -86,33 +88,33 @@
               </div>
               <div class="form-group">
                 <label>Full Name (First and Last name)</label>
-                <input class="form-control form-control-lg mb-2" type="text" name="name" id="name" required />
+                <input class="form-control form-control-lg mb-2" type="text" name="name" id="bill_name" required />
               </div>
               <div class="form-group">
                 <label>Address</label>
-                <input class="form-control form-control-lg mb-2" type="text" name="address" id="address" required />
+                <input class="form-control form-control-lg mb-2" type="text" name="address" id="bill_address" required />
               </div>
               <div class="form-group">
                 <label>Apt/Suite/Other (optional)</label>
-                <input class="form-control form-control-lg mb-2" type="text" name="apt" id="apt" />
+                <input class="form-control form-control-lg mb-2" type="text" name="apt" id="bill_apt" />
               </div>
               <div class="row g-4">
                 <div class="col">
                   <div class="form-group">
                     <label>Zip code</label>
-                    <input class="form-control form-control-lg mb-2" type="text" name="zip" id="zip" required />
+                    <input class="form-control form-control-lg mb-2" type="text" name="zip" id="bill_zip" required />
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label>City</label>
-                    <input class="form-control form-control-lg mb-2" type="text" name="city" id="city" required />
+                    <input class="form-control form-control-lg mb-2" type="text" name="city" id="bill_city" required />
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label>State</label>
-                <select class="form-select form-select-lg mb-5" aria-label=".form-select-lg example">
+                <select id="bill_state" class="form-select form-select-lg mb-5" aria-label=".form-select-lg example">
                   <option selected>TX</option>
                   <option value="AL">AL</option>
                   <option value="AK">AK</option>
