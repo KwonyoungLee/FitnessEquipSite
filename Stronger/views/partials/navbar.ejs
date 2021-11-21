@@ -14,19 +14,20 @@
             <button type="submit" class="btn search-button"><i class="fas fa-search"></i></button>
         </form>
         <ul class="nav justify-content-center">
-          <% if (message.success) {%>
+          <% if(locals.message){ 
+          if (message.success) {%>
             <span class="success-text"><%=message.success %> <%=user.first_name%></span>
-          <% }  
+          <% } }
           if (user) { %>
           <li class="nav-item">
             <a class="nav-link" href="/user-history"><i class="fas fa-user-alt fa-lg user"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt fa-lg user"></i></a>
+            <a class="nav-link" href="/customers/logout"><i class="fas fa-sign-out-alt fa-lg user"></i></a>
           </li>
           <% } else { %>
           <li class="nav-item">
-            <a class="nav-link" href="/login"><i class="fas fa-user-alt fa-lg user"></i></a>
+            <a class="nav-link" href="/customers/login"><i class="fas fa-user-alt fa-lg user"></i></a>
           </li>
           <% } %>
           <li class="nav-item">
