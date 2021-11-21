@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
 var monk = require('monk');
 
 //get db object
 var db = monk('localhost:27017/Stronger');
 var collection = db.get('Orders');
+
+
 
 // get orders by customer id if not empty
 // query by /orders?customerid=value
