@@ -9,8 +9,8 @@ $(document).ready(function(){
   				var price = v.price;
   				var image_src = v.image;
   				var description = v.description;
-    			var card = '<div class="col-md-3 mb-3 mt-4">'+
-        						'<div class="card" style="width: 18rem;">' +
+    			var card = '<div class="col">'+
+        						'<div class="card h-100" style="width: 18rem;">' +
   									'<img src="/images/Equipment/'+ image_src + '" class="card-img-top" alt="' + equipment_name + '">' + 
   									'<div class="card-body">' +
   										'<h5 class="card-title"><a href="/equipment/'+ v._id +'">' + equipment_name + '</a></h5>' +
