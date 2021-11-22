@@ -1,9 +1,9 @@
 $(document).ready(function(){
+
     $.ajax({
         method: 'GET',
-        url:'/orders?customerid=61870f65f26d32303fda29b2',
+        url:'/orders?customerid=' + user_id,
         success: function(orders){
-            console.log(orders);
             $.each(orders, function(i, order){
                 $("#id").append(order._id + '<br>');
                 $("#date").append(order.date + '<br>');

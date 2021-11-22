@@ -4,7 +4,9 @@
 <head>
   <%- include ('partials/header') %>
   <script src="/javascripts/checkout.js"></script>
-
+  <script>
+    var user_id = "<%= user._id %>"
+    </script>
 </head>
 
 <body>
@@ -17,11 +19,12 @@
           <div class="mb-5">
             <!-- Cart Items -->
             <h2>Items in Your Cart</h2>
+            <button id="remove" type="button" class="btn btn-white btn-lg">Remove</button>
           </div>
 
           <!-- Shipping Info -->
           <h2 class="mb-3">Enter Your Shipping Address</h2>
-          <form action="/confirmation">
+          <form id="order_info" action="/confirmation">
             <div class="form-group">
               <label>Country/Region</label>
 
@@ -38,7 +41,7 @@
             </div>
             <div class="form-group">
               <label>Address</label>
-              <input class="form-control form-control-lg mb-2" type="text" name="ship_address" id="address" required />
+              <input class="form-control form-control-lg mb-2" type="text" name="address" id="ship_address" required />
             </div>
             <div class="form-group">
               <label>Apt/Suite/Other (optional)</label>
