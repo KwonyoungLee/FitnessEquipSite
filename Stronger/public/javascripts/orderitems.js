@@ -11,8 +11,12 @@ $(document).ready(function(){
             console.log(order.order);
             console.log(order.order[0]);
             $.each(order.order, function(i, o){
+                $("#equipment_image").attr("src", order.order[i].equipment);
                 $(".card-title").append(order.order[i].equipment_name);
+                $("#price").append("$" + order.order[i].equipment_price);
+                $("#quantity").append(order.order[i].quantity);
             });
+            $("#total").append("$" + order.total_price);
     },
         error: function(){
             alert("Error loading orders");
