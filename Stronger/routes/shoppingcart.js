@@ -37,11 +37,14 @@ router.post('/create',function(req,res,next){
 router.post('/update/:username',function(req,res,next){
   collection.findOne({customer_username: req.params.username},function(err,current_shoppingcart){
     if (err) throw err;
+
     item_to_add = {
-      item_name : req.body.item_name,
-      item_price : req.body.item_price,
-      item_quantity : req.body.item_quantity
+      item_name : req.body.data.item_name,
+      item_price : req.body.data.item_price,
+      item_quantity : req.body.data.item_quantity,
+      item_image : req.body.data.item_image
     }
+
     if (current_shoppingcart.items == "")
     {
       current_shoppingcart.items = [item_to_add]
@@ -50,9 +53,9 @@ router.post('/update/:username',function(req,res,next){
     {
       current_shoppingcart.items.push(item_to_add)
     }
-    
-    collection.findOneAndUpdate({customer_username: req.params.username},{
-       $set: {
+
+    collection.update({_id: current_shoppingcart._id},{
+      $set: {
         items : current_shoppingcart.items
       }
     },function(shoppingcart){
@@ -61,10 +64,10 @@ router.post('/update/:username',function(req,res,next){
   })
 })
 
-/*
-router.delete('/:id',function(req,res,next){
+router.delete('/remvove/:id',function(req,res,next){
   collection.update({ _id: req.params.id},
   {
+
     $set: {
       deleted : "1"
     }
@@ -75,6 +78,7 @@ router.delete('/:id',function(req,res,next){
   })
 })
 
+/*
 router.post('/:id/update',function(req,res,next){
 
   collection.findOne({_id : req.params.id },function(err,shoppingcart){
