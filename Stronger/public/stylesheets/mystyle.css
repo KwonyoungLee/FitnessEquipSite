@@ -148,6 +148,16 @@
   padding-bottom: 10em;
 }
 
+/* Checkout Remove button */
+.btn-white {
+  background-color: #FFFFFF;
+}
+  .btn-white:hover,
+  .btn-white:focus,
+  .btn-default:active {
+    background-color: gainsboro;
+  }
+
 
 #pwd-require {
   font-size: 13px;

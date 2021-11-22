@@ -4,13 +4,16 @@
 <head>
   <%- include ('partials/header') %>
     <script src="/javascripts/orders.js"></script>
+    <script>
+      var user_id = "<%= user._id %>"
+      </script>
 </head>
 
 <body>
   <%- include ('partials/navbar') %>
 
     <!-- User info and History -->
-    <div class="row">
+    <div class="row-m-5">
       <div class="m-5">
         <h2>Account Details</h2>
         <hr>
@@ -18,8 +21,8 @@
           <div class="col-9">
             <div class="row">
               <h3>Order History</h3>
-              <div class="col-3">Name: <%=user.first_name %> <%=user.last_name %> <br>Email: <%=user.username %><br>DOB: <%=user.date_of_birth %><br>Address: <%=user.billing_address %><br></div>
-              <div class="col-4" id="id">Order ID<br></div>
+              <div class="col-4">Name: <%=user.first_name %> <%=user.last_name %> <br>Email: <%=user.username %><br>DOB: <%=user.date_of_birth %><br>Address: <%=user.billing_address %><br></div>
+              <div class="col-3" id="id">Order ID<br></div>
               <div class="col-2" id="date">Order Date<br></div>
               <div class="col" id="total_price">Total Price<br></div>
               <!-- <ul id="orderlist"></ul> -->

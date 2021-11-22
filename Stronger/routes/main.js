@@ -36,4 +36,9 @@ router.get('/confirmation', function(req, res, next) {
   res.render('confirmation', { user : req.user});
 });
 
+/* GET order page. */
+router.get('/orderitems', function(req, res, next) {
+  res.render('orderitems', { user : req.user});
+});
+
 module.exports = router;

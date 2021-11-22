@@ -1,0 +1,25 @@
+hr {
+    position: relative;
+    border: none;
+    height: 12px;
+    background: black;
+    margin-bottom: 50px;
+}
+
+.card {
+    flex-direction: row;
+  }
+  .card img {
+    width: 30%;
+  }
+
+  .card {
+    align-items: center;
+  }
+  .card-title {
+    font-weight: bold;
+  }
+  .card img {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: calc(0.25rem - 1px);
+  }
