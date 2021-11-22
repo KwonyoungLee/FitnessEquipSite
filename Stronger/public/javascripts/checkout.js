@@ -18,15 +18,6 @@ $(document).ready(function () {
         var b_zip = $("#bill_zip").val();
         var b_country = $('#bill_country').val();
 
-        //order object
-        // var order = {
-        //     customer_id: ,
-        //     customer_username:,
-        //     order:,
-        //     total_price:,
-        //     date: 
-        // }
-
         var customer = {
             billing_address: {
                 bill_address: b_address,

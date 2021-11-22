@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include ('partials/header') %>
+        <link href="/stylesheets/orderitems.css" rel="stylesheet">
+        <script src="/javascripts/orderitems.js"></script>
+</head>
+
+<body>
+    <%- include ('partials/navbar') %>
+
+        <!-- Order Items -->
+        <div class="row-m-5">
+            <div class="m-5">
+                <h2>Order # </h2><br>
+                <div class="row">
+                    <div class="col-9"><h5>Items Shipped </h5></div>
+                    <div class="col"><h5 id="date">Date Placed: </h5></div>
+                </div>
+                <hr />
+                <div class="card mb-5">
+                    <img src="/images/equipment/hydrow.jpg" class="card-img-top" />
+                    <div class="card-body">
+                      <h5 class="card-title"></h5>
+                      <p class="card-text">
+                        $20.00 <br>
+                        Qty: 1
+                      </p>
+                    </div>
+                  </div>
+                  <h5>Order Summary</h5><hr />
+                  <h5>Order Total: </h5>
+                  <h5>Shipping Address: </h5>
+            </div>
+        </div>
+
+        <footer>
+            <%- include ('partials/footer') %>
+        </footer>
+
+</body>
+
+</html>
