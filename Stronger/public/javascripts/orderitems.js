@@ -17,7 +17,7 @@ $(document).ready(function(){
                 <div class="card-body">
                   <h5 class="card-title">` + o.equipment_name + `</h5>
                   <p class="card-text">
-                    <div id="price">` + o.equipment_price +  `</div>
+                    <div id="price"> $` + o.equipment_price +  `</div>
                     <div id="quantity"> Qty:` + o.quantity +  `</div>
                   </p>
                 </div>

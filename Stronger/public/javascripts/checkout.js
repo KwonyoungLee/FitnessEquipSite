@@ -1,4 +1,8 @@
 $(document).ready(function () {    
+    var equipment_items = []
+    var tot_price = 0;
+    var today = new Date();
+    var current_date = (today.getMonth()+1)+'-'+today.getDate() + '-' + today.getFullYear();
 
     $.ajax({
         method: 'GET',
@@ -8,7 +12,15 @@ $(document).ready(function () {
             console.log(cart.items);
             console.log(cart.items[0].item_image);
             $.each(cart.items, function(i, item){
-                console.log(item.item_image);
+                var equipment = {
+                    equipment_name: item.item_name,
+                    equipment_price: item.item_price,
+                    equipment_image: item.item_image,
+                    quantity: item.item_quantity
+                }
+
+                var price = calculateTotal(item.item_price, item.item_quantity)
+                tot_price += price;
                 var order_card = `<div class="card mb-5">
                 <img src="/images/Equipment/` + item.item_image + `" class="card-img-top" />
                 <div class="card-body">
@@ -20,13 +32,9 @@ $(document).ready(function () {
                 </div>
               </div>`
               $("#items_card").append(order_card)
+              equipment_items.push(equipment)
             })
         },
-
-            // var item_image = cart.item_image,
-            // var item_name = cart.item_name,
-            // var item_price = cart.item_price,
-            // var item_quantity = cart.item_quantity,
 
         error: function(){
             alert("Error loading orders");
@@ -34,7 +42,7 @@ $(document).ready(function () {
     });
 
     $("#btn_order").click('submit', function () {
-
+        console.log(equipment_items);
         //Shipping variables
         var s_address = $("#ship_address").val();
         var s_apt = $("#ship_apt").val();
@@ -70,17 +78,15 @@ $(document).ready(function () {
             }
         }
 
-        console.log(customer);
-
-        var items = {}
-
         var order = {
-            customer_id: user._id,
+            customer_id: user_id,
             customer_username: user_username,
-            order: [items],
+            order: equipment_items,
             total_price: tot_price,
             date: current_date
         }
+
+        console.log(order);
 
         //PUT customer object
         // $.ajax({
@@ -98,21 +104,23 @@ $(document).ready(function () {
         //     },
         // });
 
-    });
         //POST order object
-        // function addOrders(){
-        // $.ajax({
-        //     method: 'POST',
-        //     url:'/orders',
-        //     data: order,
-        //     success: function(order){   
-        //         console.log(order);    
-        // },
-        //     error: function(){
-        //         alert("Error adding order");
-        //     },
-        // });
-        // }
+        $.ajax({
+            method: 'POST',
+            url:'/orders',
+            data: JSON.stringify(order),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(order){   
+                console.log(order);    
+        },
+            error: function(){
+                alert("Error adding order");
+            },
+        });
+
+    });
+
 
         function calculateTotal(item_price, quantity){
             return item_price * quantity;
