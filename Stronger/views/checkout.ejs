@@ -4,8 +4,12 @@
 <head>
   <%- include ('partials/header') %>
   <script src="/javascripts/checkout.js"></script>
+  <link href="/stylesheets/orderitems.css" rel="stylesheet">
   <script>
-    var user_id = "<%= user._id %>"
+    var user_id = "<%= user._id %>" 
+  </script>
+    <script>
+      var user_username = "<%= user.username %>" 
     </script>
 </head>
 
@@ -19,9 +23,9 @@
           <div class="mb-5">
             <!-- Cart Items -->
             <h2>Items in Your Cart</h2>
+            <div id="items_card"></div>
             <button id="remove" type="button" class="btn btn-white btn-lg">Remove</button>
           </div>
-
           <!-- Shipping Info -->
           <h2 class="mb-3">Enter Your Shipping Address</h2>
           <form id="order_info" action="/confirmation">
