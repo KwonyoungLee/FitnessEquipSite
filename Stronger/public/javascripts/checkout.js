@@ -21,19 +21,26 @@ $(document).ready(function () {
 
                 var price = calculateTotal(item.item_price, item.item_quantity)
                 tot_price += price;
+                console.log(price);
+                var quantity = JSON.parse(item.item_quantity)
                 var order_card = `<div class="card mb-5">
                 <img src="/images/Equipment/` + item.item_image + `" class="card-img-top" />
                 <div class="card-body">
                   <h5 class="card-title">` + item.item_name + `</h5>
                   <p class="card-text">
-                    <div id="price">` + item.item_price +  `</div>
-                    <div id="quantity"> Qty:` + item.item_quantity +  `</div>
+                    <div id="price">$` + item.item_price +  `</div>
+                    <div class="form-outline">
+                    <input type="number" id="typeNumber" class="form-control" value=` + item.item_quantity + `>
+                    <label class="form-label" for="typeNumber"></label>
+                  </div>
+                    <button id="remove" type="button" class="btn btn-white btn-lg" style="float: right;">Remove</button><br>
                   </p>
                 </div>
               </div>`
               $("#items_card").append(order_card)
               equipment_items.push(equipment)
             })
+            $("#total").append(`$` + tot_price.toFixed(2));
         },
 
         error: function(){

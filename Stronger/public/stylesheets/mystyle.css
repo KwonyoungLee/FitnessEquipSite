@@ -151,6 +151,7 @@
 /* Checkout Remove button */
 .btn-white {
   background-color: #FFFFFF;
+  font-size: 15px;
 }
   .btn-white:hover,
   .btn-white:focus,
