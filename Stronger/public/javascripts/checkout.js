@@ -112,7 +112,7 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(order){   
-                console.log(order);    
+                window.sessionStorage.setItem('order_id', order._id);
         },
             error: function(){
                 alert("Error adding order");
