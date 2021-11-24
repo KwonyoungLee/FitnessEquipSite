@@ -36,7 +36,7 @@ $(document).ready(function(){
  	$("#quantity-plus").click(function(){
  		if ($("#quantity-input").val() < 100)
  		{
-			$("#quantity-input").val(parseInt($("#quantity-input").val())+ 1) 
+			$("#quantity-input").val(parseInt($("#quantity-input").val())+ 1)
  		}
 	})
 
