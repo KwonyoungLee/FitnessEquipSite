@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('connect-flash');
 
+
 //user authentication
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -16,6 +17,7 @@ var mainRouter = require('./routes/main');
 var customersRouter = require('./routes/customers');
 var equipmentRouter = require('./routes/equipment');
 var ordersRouter = require('./routes/orders');
+var shoppingCart = require('./routes/shoppingcart')
 
 var app = express();
 
@@ -55,6 +57,7 @@ app.use('/', mainRouter);
 app.use('/customers',customersRouter)
 app.use('/api/equipment',equipmentRouter)
 app.use('/orders',ordersRouter)
+app.use('/api/shoppingcart',shoppingCart)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
