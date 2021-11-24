@@ -1,17 +1,17 @@
-$(document).ready(function () {    
+$(document).ready(function () {
     var equipment_items = []
     var tot_price = 0;
     var today = new Date();
-    var current_date = (today.getMonth()+1)+'-'+today.getDate() + '-' + today.getFullYear();
+    var current_date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear();
 
     $.ajax({
         method: 'GET',
-        url:'/api/shoppingcart/' + user_username,
-        success: function(cart){
+        url: '/api/shoppingcart/' + user_username,
+        success: function (cart) {
             console.log(cart);
             console.log(cart.items);
             console.log(cart.items[0].item_image);
-            $.each(cart.items, function(i, item){
+            $.each(cart.items, function (i, item) {
                 var equipment = {
                     equipment_name: item.item_name,
                     equipment_price: item.item_price,
@@ -28,7 +28,7 @@ $(document).ready(function () {
                 <div class="card-body">
                   <h5 class="card-title">` + item.item_name + `</h5>
                   <p class="card-text">
-                    <div id="price">$` + item.item_price +  `</div>
+                    <div id="price">$` + item.item_price + `</div>
                     <div class="form-outline">
                     <input type="number" id="typeNumber" class="form-control" value=` + item.item_quantity + `>
                     <label class="form-label" for="typeNumber"></label>
@@ -37,17 +37,26 @@ $(document).ready(function () {
                   </p>
                 </div>
               </div>`
-              $("#items_card").append(order_card)
-              equipment_items.push(equipment)
+                $("#items_card").append(order_card)
+                equipment_items.push(equipment)
             })
             $("#total").append(`$` + tot_price.toFixed(2));
         },
 
-        error: function(){
+        error: function () {
             alert("Error loading orders");
         },
     });
 
+    //Once user clicks remove button, remove the item from the
+    //shopping cart database.
+
+
+    //Once user sets the number field, update the contents in
+    //the shopping cart database.
+
+    //once user clicks submit button, update user addresses and 
+    //add to orders database
     $("#btn_order").click('submit', function () {
         console.log(equipment_items);
         //Shipping variables
@@ -96,40 +105,39 @@ $(document).ready(function () {
         console.log(order);
 
         //PUT customer object
-        // $.ajax({
-        //     method: 'PUT',
-        //     url:'', //api to update customer url
-        //     data: customer,
-        //     success: function(customer){ 
-                    // addOrders();  
-        //         console.log(customer); 
-        //          once customer is updated, then call post to put order
-
-        // },
-        //     error: function(){
-        //         alert("Error updating customer");
-        //     },
-        // });
-
-        //POST order object
         $.ajax({
             method: 'POST',
-            url:'/orders',
-            data: JSON.stringify(order),
+            url:'/customers/' + user_id + '/update', //api to update customer url
+            data: JSON.stringify(customer),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function(order){   
-                window.sessionStorage.setItem('order_id', order._id);
+            success: function(customer){ 
+                console.log(customer); 
         },
             error: function(){
-                alert("Error adding order");
+                alert("Error updating customer");
             },
         });
+
+        //POST order object
+        // $.ajax({
+        //     method: 'POST',
+        //     url: '/orders',
+        //     data: JSON.stringify(order),
+        //     contentType: "application/json; charset=utf-8",
+        //     dataType: "json",
+        //     success: function (order) {
+        //         window.sessionStorage.setItem('order_id', order._id);
+        //     },
+        //     error: function () {
+        //         alert("Error adding order");
+        //     },
+        // });
 
     });
 
 
-        function calculateTotal(item_price, quantity){
-            return item_price * quantity;
-        }
+    function calculateTotal(item_price, quantity) {
+        return item_price * quantity;
+    }
 });
