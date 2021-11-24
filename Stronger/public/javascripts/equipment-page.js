@@ -1,5 +1,6 @@
 var equipment_name = ""
 var equipment_price = ""
+var equipment_image = ""
 
 $(document).ready(function(){
 
@@ -7,7 +8,9 @@ $(document).ready(function(){
 		 url: '/api/equipment/' + equipment_id,
 		 dataType: "json",
 		 success: function(data) {
-		 	var image_src = "/images/Equipment/" + data.image;
+
+		 	equipment_image = data.image
+		 	var image_src = "/images/Equipment/" + equipment_image;
 
 		 	equipment_name = data.item_name;
 		 	equipment_price = "$" + data.price;
@@ -45,48 +48,26 @@ $(document).ready(function(){
 	})
 
 	$("#add-to-cart-button").click(function(){
-		if (user !== undefined)
-		{
-			var today = new Date();
-			var dd = String(today.getDate()).padStart(2, '0');
-			var mm = String(today.getMonth() + 1).padStart(2, '0');
-			var yyyy = today.getFullYear();
+		var order_quantity = $("#quantity-input").val();
 
-			today = mm + '/' + dd + '/' + yyyy;
+		var order_details = {
+            "item_name" : equipment_name,
+            "item_price" : equipment_price,
+            "item_quantity" : order_quantity,
+            "item_image" : equipment_image
+		}
 
-			var order_quantity = $("#quantity-input").val();
-
-			var order_details = {
-	    		"Customer_id" : "61870f65f26d32303fda29b2",
-	    		"Customer_username" : "test_customer@gmail.com",
-	    		"Order" : [ 
-					{
-			            "Equipment_id" : equipment_id,
-			            "Equipment_name" : equipment_name,
-			            "Equipment_price" : equipment_price,
-			            "Quantity" : order_quantity,
-		        	}
-	    		],
-	    		"Total price" : "449.97",
-	    		"Date" : today
+		$.ajax({
+			method: 'POST',
+			url: '/api/shoppingcart/update/' + username,
+			data: order_details,
+			success: function(data){
+				console.log("Successfully added to cart")
+			},
+			error: function(){
+				console.log("Error inserting order");
 			}
-
-			$.ajax({
-				method: 'POST',
-				url: '/orders',
-				data: order_details,
-				success: function(data){
-					console.log("Successfully added to cart")
-				},
-				error: function(){
-					console.log("Error inserting order");
-				}
-			});	
-		}
-		else
-		{
-			alert("Please login before adding to cart")
-		}
+		});	
 		
 	})
 })
