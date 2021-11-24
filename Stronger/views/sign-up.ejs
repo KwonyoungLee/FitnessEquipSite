@@ -2,6 +2,7 @@
   <html lang="en">
   <head>
     <%- include ('partials/header') %>
+    <script src="/javascripts/sign-up.js"></script>
   </head>
   <body>
   <%- include ('partials/navbar') %>
@@ -12,14 +13,12 @@
         <h2>Sign Up</h2>
         <div class="card m-2 p-4">
                  <!-- Basic Error Message -->
-                 <% if (locals.Errormessage) {%>
-                  <div class="error-message">
-                    <p class="error-text"><%=Errormessage %></p>
-                  </div>
-                  <% } %>          
+                  <div class="errors-message">
+                    <p class="errors-text"></p>
+                  </div>         
           <div class="card-body m-4">
               <div id="info"></div>
-                <form role="form" action="/customers/signup" method="post">
+                <form id="signup_form">
                   <div class="row g-4">
                     <div class="col">
                       <div class="form-group">
@@ -63,7 +62,8 @@
       </div>
     </div>
   </div>
-  
+<div>
+  </div>
     <footer>
       <%- include ('partials/footer') %>
     </footer>

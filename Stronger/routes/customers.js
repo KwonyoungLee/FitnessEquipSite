@@ -3,6 +3,15 @@ var router = express.Router();
 var passport = require('passport');
 var Account = require('../models/account');
 var flash = require('connect-flash');
+var monk = require('monk');
+var bodyParser = require('body-parser');
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended : true}));
+
+
+
+var db = monk('127.0.0.1:27017/Stronger')
+var collection = db.get('CustomerInformation');
 
 /* GET log-in page. */
 router.get('/login', function(req, res, next) {
@@ -35,30 +44,35 @@ router.post('/signup', function(req, res) {
   var last_name = req.body.lname;
   var username = req.body.username;
   var password = req.body.password;
-  var confirm_password = req.body.confirmpwd;
-  var dob = req.body.dob;
+  var dob = req.body.date_of_birth;
 
-  if(password != confirm_password){
-    res.render('sign-up', { user:req.user, Errormessage:"Password doen not match."});
-  }
-  else{
+  console.log(first_name);
     Account.register(new Account({ 
-      username : req.body.username,
-      first_name: req.body.fname,
-      last_name: req.body.lname,
-      date_of_birth: req.body.dob,
+      username : username,
+      first_name: first_name,
+      last_name: last_name,
+      date_of_birth: dob,
       billing_address: "",
       shipping_address: ""
     }), req.body.password, function(err, account) {
         if (err) {
+            console.log(err.message);
             return res.render('sign-up', {Errormessage : account });
         }
-
+          console.log("attempting");
         passport.authenticate('local', {successFlash: 'Welcome!'})(req, res, function () {
+          console.log("complete");
           res.render('complete', {user: req.user, message: req.flash()});
         });
     });
-  }
+});
+
+router.get('/check', function(req, res, next){
+  collection.findOne({ username : req.body.username}, function(err,obj){
+    if (err) throw err;
+    res.json(obj);
+  });
+
 });
 
 module.exports = router;
