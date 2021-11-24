@@ -4,6 +4,11 @@ var monk = require('monk');
 
 var methodOverride = require('method-override')
 router.use(methodOverride('_method'));
+
+var bodyParser = require('body-parser');
+router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 var lodash = require("lodash");
 
 var db = monk('127.0.0.1:27017/Stronger')
@@ -39,10 +44,10 @@ router.post('/update/:username',function(req,res,next){
     if (err) throw err;
 
     item_to_add = {
-      item_name : req.body.data.item_name,
-      item_price : req.body.data.item_price,
-      item_quantity : req.body.data.item_quantity,
-      item_image : req.body.data.item_image
+      item_name : req.body.item_name,
+      item_price : req.body.item_price,
+      item_quantity : req.body.item_quantity,
+      item_image : req.body.item_image
     }
 
     if (current_shoppingcart.items == "")
@@ -62,8 +67,10 @@ router.post('/update/:username',function(req,res,next){
       res.json(shoppingcart);
     })
   })
+
 })
 
+/*
 router.delete('/remvove/:id',function(req,res,next){
   collection.update({ _id: req.params.id},
   {
