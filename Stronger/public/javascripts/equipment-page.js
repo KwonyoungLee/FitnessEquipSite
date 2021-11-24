@@ -1,6 +1,7 @@
 var equipment_name = ""
 var equipment_price = ""
 var equipment_image = ""
+var image_src = ""
 
 $(document).ready(function(){
 
@@ -10,7 +11,7 @@ $(document).ready(function(){
 		 success: function(data) {
 
 		 	equipment_image = data.image
-		 	var image_src = "/images/Equipment/" + equipment_image;
+		 	image_src = "/images/Equipment/" + equipment_image;
 
 		 	equipment_name = data.item_name;
 		 	equipment_price = "$" + data.price;
@@ -62,12 +63,25 @@ $(document).ready(function(){
 			url: '/api/shoppingcart/update/' + username,
 			data: order_details,
 			success: function(data){
-				console.log("Successfully added to cart")
+				
+				$("#modal-image").attr("src",image_src)
+				$("#modal-image").attr("alt",equipment_name)
+				$("#modal-image").attr("width","100px")
+				$("#modal-image").attr("height","100px")
+				$("#modal-item-name").text(equipment_name)
+				$("#modal-item-quantity").text("Quantity: " + order_quantity)
+				$("#add-to-cart-success-modal").css("display","block")
+				$("#add-to-cart-success-modal").toggleClass("show")
 			},
 			error: function(){
 				console.log("Error inserting order");
 			}
 		});	
 		
+	})
+
+	$("#modal-close").click(function(){
+		$("#add-to-cart-success-modal").css("display","none")
+		$("#add-to-cart-success-modal").toggleClass("show")
 	})
 })
