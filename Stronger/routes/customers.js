@@ -72,4 +72,19 @@ router.get('/:username', function(req, res, next){
 
 });
 
+
+router.post('/:id/update',function(req, res, next){
+  collection.update({ _id: req.params.id},
+  {
+    $set: {
+      billing_address : req.body.billing_address,
+      shipping_address : req.body.shipping_address
+    }
+  }
+  ,function(err,user){
+    if (err) throw err;
+    res.json(user)
+  })
+})
+
 module.exports = router;
