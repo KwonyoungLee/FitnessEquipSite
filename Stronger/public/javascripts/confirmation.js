@@ -1,4 +1,4 @@
 $(document).ready(function(){
-    var order_id = window.sessionStorage.getItem("order_id");
-    $("p").append(order_id);
+    var order_no = window.sessionStorage.getItem("order_no");
+    $("p").append(order_no);
 });

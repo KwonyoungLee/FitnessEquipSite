@@ -104,7 +104,7 @@ $(document).ready(function () {
 
         console.log(order);
 
-        //PUT customer object
+        //POST customer object
         $.ajax({
             method: 'POST',
             url:'/customers/' + user_id + '/update', //api to update customer url
@@ -112,30 +112,31 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(customer){ 
-                console.log(customer); 
-        },
+                console.log("in post customer");
+            },
             error: function(){
                 alert("Error updating customer");
             },
         });
 
         //POST order object
-        // $.ajax({
-        //     method: 'POST',
-        //     url: '/orders',
-        //     data: JSON.stringify(order),
-        //     contentType: "application/json; charset=utf-8",
-        //     dataType: "json",
-        //     success: function (order) {
-        //         window.sessionStorage.setItem('order_id', order._id);
-        //     },
-        //     error: function () {
-        //         alert("Error adding order");
-        //     },
-        // });
+        $.ajax({
+            method: 'POST',
+            url: '/orders',
+            data: JSON.stringify(order),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (o) {
+                console.log("in post order");
+                window.sessionStorage.setItem('order_no', o._id);
+                // window.location.replace("localhost:3000/confirmation");
+            },
+            error: function () {
+                alert("Error adding order");
+            },
+        });
 
     });
-
 
     function calculateTotal(item_price, quantity) {
         return item_price * quantity;
