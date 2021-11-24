@@ -22,14 +22,14 @@ router.get('/login', function(req, res, next) {
 /* POST log-in */
 router.post('/login',
   passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/customers/login',
-                                   failureFlash: true,
-                                   successFlash: 'Welcome!'})
-);
+   failureRedirect: '/customers/login',
+   failureFlash: true,
+   successFlash: 'Welcome!'})
+  );
 
 router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+  req.logout();
+  res.redirect('/');
 });
 
 
@@ -44,31 +44,28 @@ router.post('/signup', function(req, res) {
   var last_name = req.body.lname;
   var username = req.body.username;
   var password = req.body.password;
-  var dob = req.body.date_of_birth;
+  var dob = req.body.dob;
 
-  console.log(first_name);
-    Account.register(new Account({ 
-      username : username,
-      first_name: first_name,
-      last_name: last_name,
-      date_of_birth: dob,
-      billing_address: "",
-      shipping_address: ""
-    }), req.body.password, function(err, account) {
-        if (err) {
-            console.log(err.message);
-            return res.render('sign-up', {Errormessage : account });
-        }
-          console.log("attempting");
-        passport.authenticate('local', {successFlash: 'Welcome!'})(req, res, function () {
-          console.log("complete");
-          res.render('complete', {user: req.user, message: req.flash()});
-        });
+  Account.register(new Account({ 
+    username : username,
+    first_name: first_name,
+    last_name: last_name,
+    date_of_birth: dob,
+    billing_address: "",
+    shipping_address: ""
+  }), req.body.password, function(err, account) {
+    if (err) {
+      console.log(err.message);
+      return res.render('sign-up', {Errormessage : account });
+    }
+    passport.authenticate('local', {successFlash: 'Welcome!'})(req, res, function () {
+      res.render('complete', {user: req.user, message: req.flash()});
     });
+  });
 });
 
-router.get('/check', function(req, res, next){
-  collection.findOne({ username : req.body.username}, function(err,obj){
+router.get('/:username', function(req, res, next){
+  collection.findOne({ username : req.params.username}, function(err,obj){
     if (err) throw err;
     res.json(obj);
   });
