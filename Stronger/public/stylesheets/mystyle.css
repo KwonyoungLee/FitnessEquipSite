@@ -160,9 +160,6 @@
   }
 
 
-#pwd-require {
-  font-size: 13px;
-}
 
 .result-custom {
   text-align: center;
@@ -192,17 +189,3 @@
 }
 
 
-.errors-message {
-  background-color: #fce4e4;
-  border: 1px solid #fcc2c3;
-  text-align: center;
-  padding-top: 20px;
-  display: none;
-}
-
-.errors-text {
-  color: #cc0033;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-}
