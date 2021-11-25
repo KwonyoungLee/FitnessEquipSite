@@ -193,6 +193,18 @@ $(document).ready(function () {
             },
         });
 
+        //CLEAR CART
+        $.ajax({
+            method: 'DELETE',
+            url:'/api/shoppingcart/' + user_username,
+            success: function(cart){ 
+                console.log(cart);
+            },
+            error: function(){
+                alert("Error deleting all items in shopping cart");
+            },
+        });
+
     });
 
     function calculateTotal(item_price, quantity) {

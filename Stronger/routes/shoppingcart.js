@@ -82,6 +82,16 @@ router.put('/:username/:item_name', function(req, res) {
   });
 });
 
+/* DELETE all items from cart */
+router.delete('/:username', function(req, res) {
+  collection.update(
+    {customer_username: req.params.username},
+    { $set: {'items': []}}, {new: true}, function(err, items){
+      if(err) throw err;
+      res.json(items);
+  });
+});
+
 
 /*
 router.delete('/remvove/:id',function(req,res,next){
