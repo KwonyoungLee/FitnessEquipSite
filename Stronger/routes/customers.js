@@ -13,6 +13,8 @@ router.use(bodyParser.urlencoded({ extended : true}));
 var db = monk('127.0.0.1:27017/Stronger')
 var collection = db.get('CustomerInformation');
 
+var shoppingCartCollection = db.get('ShoppingCart')
+
 /* GET log-in page. */
 router.get('/login', function(req, res, next) {
   res.render('log-in', { user : req.user, message: req.flash() });
@@ -55,12 +57,19 @@ router.post('/signup', function(req, res) {
     shipping_address: ""
   }), req.body.password, function(err, account) {
     if (err) {
-      console.log(err.message);
       return res.render('sign-up', {Errormessage : account });
+    }else{
+      shoppingCartCollection.insert(
+      {
+        customer_username : username,
+        items : ""
+      },function(err,shoppingcart){
+        if (err) throw err;
+        passport.authenticate('local', {successFlash: 'Welcome!'})(req, res, function () {
+          res.render('complete', {user: req.user, message: req.flash()});
+        })
+      });
     }
-    passport.authenticate('local', {successFlash: 'Welcome!'})(req, res, function () {
-      res.render('complete', {user: req.user, message: req.flash()});
-    });
   });
 });
 
