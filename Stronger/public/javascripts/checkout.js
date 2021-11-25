@@ -30,7 +30,7 @@ $(document).ready(function () {
                   <p class="card-text">
                     <div id="price">$` + item.item_price + `</div>
                     <div class="form-outline">
-                    <input type="number" id=qty class="form-control" data-name="`+ item.item_name +`" value=` + item.item_quantity + `>
+                    <input type="number" id=qty class="form-control" min="1" data-name="`+ item.item_name +`" value=` + item.item_quantity + `>
                     <label class="form-label" for="typeNumber"></label>
                   </div>
                     <button type="button" class="delete-item" data-name="`+ item.item_name +`" style="float: right;">Remove</button><br>
@@ -128,7 +128,7 @@ $(document).ready(function () {
         var b_address = $("#bill_address").val();
         var b_apt = $("#bill_apt").val();
         var b_city = $("#bill_city").val();
-        var b_state = $("bill_state").val();
+        var b_state = $("#bill_state").val();
         var b_zip = $("#bill_zip").val();
         var b_country = $('#bill_country').val();
 

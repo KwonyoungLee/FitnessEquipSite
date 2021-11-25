@@ -7,6 +7,9 @@
     <script>
       var user_id = "<%= user._id %>"
       </script>
+    <script>
+      var user_username = "<%= user.username %>" 
+    </script>
 </head>
 
 <body>
@@ -21,7 +24,9 @@
           <div class="col-9">
             <div class="row">
               <h3>Order History</h3>
-              <div class="col-4">Name: <%=user.first_name %> <%=user.last_name %> <br>Email: <%=user.username %><br>DOB: <%=user.date_of_birth %><br>Address: <%=user.billing_address %><br></div>
+              <div class="col-4">Name: <%=user.first_name %> <%=user.last_name %> <br>Email: <%=user.username %><br>DOB: <%=user.date_of_birth %><br>
+                <p id="address"></p>
+              <br></div>
               <div class="col-3" id="id">Order ID<br></div>
               <div class="col-2" id="date">Order Date<br></div>
               <div class="col" id="total_price">Total Price<br></div>
