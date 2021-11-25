@@ -42,8 +42,8 @@ router.get('/orderitems', function(req, res, next) {
 });
 
 /* GET contact page. */
-router.get('/contact', function(req, res, next) {
-  res.render('contact', { user : req.user});
+router.get('/contact-us', function(req, res, next) {
+  res.render('contact-us', { user : req.user});
 });
 
 /* GET about-us page. */
