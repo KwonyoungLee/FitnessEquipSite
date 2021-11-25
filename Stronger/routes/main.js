@@ -46,4 +46,8 @@ router.get('/contact', function(req, res, next) {
   res.render('contact', { user : req.user});
 });
 
+/* GET about-us page. */
+router.get('/about-us', function(req, res, next) {
+  res.render('about-us', { user : req.user});
+});
 module.exports = router;
