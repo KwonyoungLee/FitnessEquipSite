@@ -2,7 +2,7 @@
   body {
     background-color: #FFFFFF;
     /* needed to set this because of fixed-top for nav */
-    padding-top: 14rem;
+    padding-top: 16rem;
   }
 
   a {
@@ -77,7 +77,7 @@
     display: none;
   }
 
-  .list-group-item{
+ .list-group-item{
     background-color: transparent;
     border: none;
     color: white;

@@ -41,4 +41,9 @@ router.get('/orderitems', function(req, res, next) {
   res.render('orderitems', { user : req.user});
 });
 
+/* GET contact page. */
+router.get('/contact', function(req, res, next) {
+  res.render('contact', { user : req.user});
+});
+
 module.exports = router;
