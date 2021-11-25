@@ -35,7 +35,7 @@ router.get('/categories',function(req,res,next){
 router.get('/page/:pagenumber', function(req, res, next) {
   var pagelimit = 8;
   var page = req.params.pagenumber;
-  collection.find({},{limit : pagelimit, skip : 0 },function(err,equipment){
+  collection.find({},{limit : pagelimit, skip : ((pagelimit * page) - pagelimit) },function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
