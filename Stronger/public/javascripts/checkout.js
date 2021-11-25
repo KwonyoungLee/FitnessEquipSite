@@ -23,24 +23,24 @@ $(document).ready(function () {
                 tot_price += price;
                 console.log(price);
                 var quantity = JSON.parse(item.item_quantity)
-                var order_card = `<div class="card mb-5">
+                var order_card = `<div id="equipment_card" class="card mb-5">
                 <img src="/images/Equipment/` + item.item_image + `" class="card-img-top" />
                 <div class="card-body">
                   <h5 class="card-title">` + item.item_name + `</h5>
                   <p class="card-text">
                     <div id="price">$` + item.item_price + `</div>
                     <div class="form-outline">
-                    <input type="number" id="typeNumber" class="form-control" value=` + item.item_quantity + `>
+                    <input type="number" id=qty class="form-control" data-name="`+ item.item_name +`" value=` + item.item_quantity + `>
                     <label class="form-label" for="typeNumber"></label>
                   </div>
-                    <button id="remove" type="button" class="btn btn-white btn-lg" style="float: right;">Remove</button><br>
+                    <button type="button" class="delete-item" data-name="`+ item.item_name +`" style="float: right;">Remove</button><br>
                   </p>
                 </div>
               </div>`
                 $("#items_card").append(order_card)
                 equipment_items.push(equipment)
             })
-            $("#total").append(`$` + tot_price.toFixed(2));
+            $("#total").text(`Order Total: $` + tot_price.toFixed(2));
         },
 
         error: function () {
@@ -50,10 +50,67 @@ $(document).ready(function () {
 
     //Once user clicks remove button, remove the item from the
     //shopping cart database.
-
+    $("#items_card").on("click", ".delete-item", function(){
+        var item_name = $(this).attr("data-name");
+        $(this).closest('#equipment_card').remove();// remove the closest equipment_card
+        $.ajax({
+            method: 'DELETE',
+            url: '/api/shoppingcart/' + user_username + "/" + item_name,
+            success: function (cart) {
+                tot_price = 0
+                equipment_items = []
+                $.each(cart.items, function (i, item) {
+                    var equipment = {
+                        equipment_name: item.item_name,
+                        equipment_price: item.item_price,
+                        equipment_image: item.item_image,
+                        quantity: item.item_quantity
+                    }
+                    
+                var price = calculateTotal(item.item_price, item.item_quantity)
+                tot_price += price
+                equipment_items.push(equipment)
+                });
+                $("#total").text(`Order Total: $` + tot_price.toFixed(2));
+            },
+            error: function () {
+                alert("Error deleting order");
+            },
+        });
+    });
 
     //Once user sets the number field, update the contents in
     //the shopping cart database.
+    $("#items_card").on("change","#qty", function(){
+        var item_name = $(this).attr("data-name");
+        var qty_obj = {item_quantity: $(this).val()};
+        var qty = $(this).val();
+        console.log(equipment_items);
+        $.ajax({
+        method: 'PUT',
+        url: '/api/shoppingcart/' + user_username + "/" + item_name,
+        data: qty_obj,
+        success: function (cart) {
+            var t_price = 0
+            equipment_items.forEach(function(i){
+                console.log(i);
+                if(i.equipment_name == item_name){
+                    i.quantity = qty
+                }
+                console.log(i.equipment_quantity)
+                t_price += calculateTotal(i.equipment_price, i.quantity)
+                console.log(t_price);
+                tot_price = t_price
+            })
+            console.log(cart);
+            console.log(tot_price);
+            $("#total").text(`Order Total: $` + tot_price.toFixed(2));
+        },
+        error: function(){
+            alert("Error updating quantity");
+        },
+    });
+    });
 
     //once user clicks submit button, update user addresses and 
     //add to orders database
