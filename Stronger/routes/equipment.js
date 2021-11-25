@@ -10,7 +10,32 @@ var db = monk('127.0.0.1:27017/Stronger')
 var collection = db.get('Equipment');
 
 router.get('/', function(req, res, next) {
+  var pagelimit = 8;
+  var page = req
   collection.find({},function(err,equipment){
+    if (err) throw err;
+    res.json(equipment);
+  })
+});
+
+router.get('/count',function(req,res,next){
+  collection.count({},function(err,count){
+    if (err) throw err;
+    res.json(count)
+  })
+})
+
+router.get('/categories',function(req,res,next){
+  collection.distinct("category",function(err,categories){
+    if (err) throw err;
+    res.json(categories);
+  })
+})
+
+router.get('/page/:pagenumber', function(req, res, next) {
+  var pagelimit = 8;
+  var page = req.params.pagenumber;
+  collection.find({},{limit : pagelimit, skip : 0 },function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })

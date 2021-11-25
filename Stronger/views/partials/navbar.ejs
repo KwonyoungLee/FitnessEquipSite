@@ -52,19 +52,14 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 PRODUCTS
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Treadmill</a></li>
-                <li><a class="dropdown-item" href="#">Ellipticals</a></li>
-                <li><a class="dropdown-item" href="#">Bikes</a></li>
-                <li><a class="dropdown-item" href="#">Dumbbells</a></li>    
-                <li><a class="dropdown-item" href="#">Rowing Machines</a></li>           
+              <ul id="categories-dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
               </ul>
             </li>           
             <li class="nav-item nav-custom">
-              <a class="nav-link" href="#">ABOUT</a>
+              <a class="nav-link" href="/about-us">ABOUT</a>
             </li>
             <li class="nav-item nav-custom">
-              <a class="nav-link" href="#">CONTACT</a>
+              <a class="nav-link" href="/contact-us">CONTACT</a>
             </li>
           </ul>
           <form class="d-flex">
@@ -75,4 +70,21 @@
         </div>
       </div>
     </nav>
+
+    <% if (user) {
+      if(user.username == 'admin'){%>
+    <!-- Thrid nav bar for ADMIN -->
+   <nav class="navbar navbar-light bg-light navbar-expand-sm">
+        <div class="container-fluid">
+            <ul class="navbar-nav">            
+              <li class="nav-item nav-custom">
+                <a class="nav-link" href="#">List all item</a>
+              </li>
+              <li class="nav-item nav-custom">
+                <a class="nav-link" href="#">Add new item</a>
+              </li>
+            </ul>
+        </div>
+      </nav>
+      <%}}%>
   </div>

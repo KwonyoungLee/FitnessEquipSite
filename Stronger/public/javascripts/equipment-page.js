@@ -14,7 +14,7 @@ $(document).ready(function(){
 		 	image_src = "/images/Equipment/" + equipment_image;
 
 		 	equipment_name = data.item_name;
-		 	equipment_price = "$" + data.price;
+		 	equipment_price = data.price;
 
 		 	$("#equipment-img").attr("src",image_src);
 		 	$("#equipment-img").attr("alt",data.item_name);
@@ -23,7 +23,7 @@ $(document).ready(function(){
 			$("#equipment-img").css("height","500px");
 
 		 	$("#equipment-name").text(equipment_name);
-		 	$("#equipment-price").text(equipment_price);
+		 	$("#equipment-price").text("$" + data.price);
 		 	$("#equipment-description").text(data.description);
 
 		 },
