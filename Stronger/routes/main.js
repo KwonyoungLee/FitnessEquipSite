@@ -50,4 +50,9 @@ router.get('/contact-us', function(req, res, next) {
 router.get('/about-us', function(req, res, next) {
   res.render('about-us', { user : req.user});
 });
+
+router.get('/list-all-items', function(req, res, next) {
+  res.render('list-all-items', { user : req.user});
+});
+
 module.exports = router;
