@@ -13,14 +13,14 @@ $(document).ready(function(){
 			number_of_items = data;
 			number_of_pages = Math.ceil(number_of_items / page_limit);
 
-			$("#pagination-ul").append('<li class="page-item"><a class="page-link">Prev</a></li>');
+			$("#pagination-ul").append('<li class="page-item"><a class="page-link" href="#">Prev</a></li>');
 
 			for (let i = 0; i < (Math.ceil(number_of_items / page_limit)); i++) {
 				var new_page = $("<li></li>");
 				$(new_page).attr("id","pagination-li-" + (i+1));
 				$(new_page).attr("class","page-item");
 				$(new_page).attr("page-number","" + (i+1) +"");
-				$(new_page).html("<a class='page-link'>" + (i+1) + "</a>");
+				$(new_page).html("<a class='page-link' href='#'>" + (i+1) + "</a>");
 				
 				(function(index){
 					new_page.on("click",function(){
