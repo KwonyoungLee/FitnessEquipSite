@@ -114,7 +114,12 @@ $(document).ready(function () {
 
     //once user clicks submit button, update user addresses and 
     //add to orders database
-    $("#btn_order").click('submit', function () {
+    $("#btn_order").click('submit', function (e) {
+        if(equipment_items.length == 0){
+            e.preventDefault();
+            alert("Cart empty. Please add items to cart.")
+            return false;
+        }
         console.log(equipment_items);
         //Shipping variables
         var s_address = $("#ship_address").val();
