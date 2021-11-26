@@ -3,7 +3,7 @@
 
 <head>
     <%- include ('partials/header') %>
-        <script src="/javascripts/orders.js"></script>
+    <script src="/javascripts/list-all-items.js"></script>
         <script>
             var user_id = "<%= user._id %>"
         </script>
@@ -20,12 +20,13 @@
             <div class="m-5">
                 <h2>All Equipment in Inventory</h2>
                 <hr>
-                <div class="row">
-                    <div class="col" id="item_name">Name</div>
-                    <div class="col" id="item_price">Price<br></div>
-                    <div class="col" id="item_category">Category<br></div>
-                    <div class="col" id="item_image">Image<br></div>
-                    <div class="col" id="item_quantity">Quantity in Stock<br></div>
+                <div class="row" id="items_list">
+                    <div class="col-4" id="item_name"><h6>Name</h6></div>
+                    <div class="col-1" id="item_price"><h6>Price</h6></div>
+                    <div class="col-2" id="item_category"><h6>Category</h6></div>
+                    <div class="col-3" id="item_image"><h6>Image File</h6></div>
+                    <div class="col-1" id="item_quantity"><h6>Qty</h6></div>
+                    <div class="col-1" id="item_deleted"><h6>Deleted</h6></div>
                 </div>
             </div>
         </div>
