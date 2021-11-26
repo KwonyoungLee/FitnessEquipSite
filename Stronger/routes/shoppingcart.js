@@ -40,7 +40,8 @@ router.post('/update/:username',function(req,res,next){
     item_to_add = {
       item_name : req.body.item_name,
       item_price : req.body.item_price,
-      item_quantity : req.body.item_quantity
+      item_quantity : req.body.item_quantity,
+      item_image : req.body.item_image
     }
     if (current_shoppingcart.items == "")
     {
