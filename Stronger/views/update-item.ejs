@@ -19,7 +19,7 @@
                     <h2>Update Item</h2>
                     <div class="card m-2 p-4">
                         <div class="card-body">
-                            <form action="/equipment/update/<%=id%>" method="POST">
+                            <form action="/equipment/update/<%=id%>/?_method=PUT" method="POST">
                                 <div class="form-group mb-3">
                                     <label for="equipment_name" class="form-label">Equipment Id</label>
                                     <input type="text" class="form-control" id="equipment_id" placeholder="Enter Equipment Name" value="" readonly>

@@ -10,9 +10,9 @@ var monk = require('monk');
 var db = monk('127.0.0.1:27017/Stronger')
 var collection = db.get('Equipment');
 
-//var methodOverride = require('method-override')
+var methodOverride = require('method-override')
 
-//router.use(methodOverride('_method'))
+router.use(methodOverride('_method'))
 //var bodyParser = require('body-parser');
 //router.use(bodyParser.json());
 //router.use(bodyParser.urlencoded({ extended : true}));
@@ -71,8 +71,7 @@ router.get('/equipment/update/:id', function(req, res, next) {
   res.render('update-item', { user : req.user, id : req.params.id });
 });
 
-router.post('/equipment/update/:id', function(req, res, next) {
-
+router.put('/equipment/update/:id', function(req, res, next) {
   collection.update({_id : req.params.id},{
     $set:{
       item_name: req.body.equipment_name,
