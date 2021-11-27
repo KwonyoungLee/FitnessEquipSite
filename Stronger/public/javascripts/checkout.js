@@ -33,7 +33,7 @@ $(document).ready(function () {
                     <input type="number" id=qty class="form-control" min="1" data-name="`+ item.item_name +`" value=` + item.item_quantity + `>
                     <label class="form-label" for="typeNumber"></label>
                   </div>
-                    <button type="button" class="delete-item" data-name="`+ item.item_name +`" style="float: right;">Remove</button><br>
+                    <button type="button" class="delete-item btn btn-white" data-name="`+ item.item_name +`" style="float: right;">Remove</button><br>
                   </p>
                 </div>
               </div>`
@@ -120,6 +120,7 @@ $(document).ready(function () {
             alert("Cart empty. Please add items to cart.")
             return false;
         }
+
         console.log(equipment_items);
         //Shipping variables
         var s_address = $("#ship_address").val();
@@ -165,6 +166,29 @@ $(document).ready(function () {
         }
 
         console.log(order);
+
+        //UPDATE QUANTITY IN INVENTORY
+        // equipment_items.forEach(function(i){
+        //     console.log(i);
+        //     console.log("updating quantity:" + i);
+        //     console.log(i.quantity)
+        //     var i_quantity = {quantity_in_stock : i.quantity }
+        //     console.log(i_quantity)
+        //     $.ajax({
+        //         method: 'PUT',
+        //         url: '/api/equipment/' + i.equipment_name,
+        //         data: JSON.stringify(i_quantity),
+        //         contentType: "application/json; charset=utf-8",
+        //         dataType: "json",
+        //         success: function(item){
+        //             console.log(item)
+        //             console.log("success returned");
+        //         },
+        //         error: function(){
+        //             alert("Error updating quantity");
+        //         },
+        //     });
+        // })
 
         //POST customer object
         $.ajax({

@@ -96,5 +96,17 @@ router.post('/:id/update',function(req,res,next){
   })
 })
 
+/* UPDATE PARTICULAR EQUIPMENT QUANTITY*/
+// router.put('/:item_name', function(req,res){
+//   console.log("in post route")
+//   console.log("req" + req.body.i_quantity);
+//   collection.update({item_name: req.params.item_name},
+//     { $inc: {$toInt: '$quantity_in_stock'} -req.body.quantity_in_stock}
+//     , function(err, equipment){
+//       if(err) throw err;
+//       res.json(equipment)
+//     })
+// });
+
 
 module.exports = router;
