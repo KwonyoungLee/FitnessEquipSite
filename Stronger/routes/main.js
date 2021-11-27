@@ -1,21 +1,27 @@
 var express = require('express');
 var router = express.Router();
 var flash = require('connect-flash');
+
 var fileUpload = require('express-fileupload')
-//var cors = require('cors')
-//var morgan = require('morgan');
-//var lodash = require('lodash');
+router.use(fileUpload());
+
+var multer = require('multer')
+var path = require('path');
+
+var morgan = require('morgan');
+router.use(morgan('dev'))
 
 var monk = require('monk');
 var db = monk('127.0.0.1:27017/Stronger')
 var collection = db.get('Equipment');
 
-var methodOverride = require('method-override')
+var cors = require('cors')
+router.use(cors())
 
+var methodOverride = require('method-override')
 router.use(methodOverride('_method'))
-//var bodyParser = require('body-parser');
-//router.use(bodyParser.json());
-//router.use(bodyParser.urlencoded({ extended : true}));
+
+const destination = path.join(__dirname,'./../public/images/Equipment/');
 
 /* GET main home page. */
 router.get('/', function(req, res, next) {
@@ -71,20 +77,40 @@ router.get('/equipment/update/:id', function(req, res, next) {
   res.render('update-item', { user : req.user, id : req.params.id });
 });
 
-router.put('/equipment/update/:id', function(req, res, next) {
-  collection.update({_id : req.params.id},{
-    $set:{
-      item_name: req.body.equipment_name,
-      price: req.body.equipment_price,
-      description: req.body.equipment_description,
-      category: req.body.equipment_category,
-      image: req.body.equipment_image,
-      quantity_in_stock: req.body.equipment_quantity,
-    }
+router.post('/equipment/update/:id', function(req, res, next) {
+
+  if(req.files){
+    var equipment_image_file = req.files.equipment_image_file;
+    equipment_image_file.mv(path.join(destination,equipment_image_file.name), function(err) {
+      if (err) throw err;
+    });
+    collection.update({_id : req.params.id},{
+      $set:{
+        item_name: req.body.equipment_name,
+        price: req.body.equipment_price,
+        description: req.body.equipment_description,
+        category: req.body.equipment_category,
+        image: equipment_image_file.name,
+        quantity_in_stock: req.body.equipment_quantity
+      }
     },function(err,equipment){
       if(err) throw err;
-      res.redirect('/equipment/' + req.params.id)
+      res.redirect('/equipment/' + req.params.id);
     })
+  }else{
+    collection.update({_id : req.params.id},{
+      $set:{
+        item_name: req.body.equipment_name,
+        price: req.body.equipment_price,
+        description: req.body.equipment_description,
+        category: req.body.equipment_category,
+        quantity_in_stock: req.body.equipment_quantity
+      }
+    },function(err,equipment){
+      if(err) throw err;
+      res.redirect('/equipment/' + req.params.id);
+    })
+  }
 });
 
 

@@ -19,7 +19,7 @@
                     <h2>Update Item</h2>
                     <div class="card m-2 p-4">
                         <div class="card-body">
-                            <form action="/equipment/update/<%=id%>/?_method=PUT" method="POST">
+                            <form action="/equipment/update/<%=id%>" method="POST" enctype="multipart/form-data">
                                 <div class="form-group mb-3">
                                     <label for="equipment_name" class="form-label">Equipment Id</label>
                                     <input type="text" class="form-control" id="equipment_id" placeholder="Enter Equipment Name" value="" readonly>
@@ -44,10 +44,6 @@
                                 <div class="form-group mb-3">
                                     <label for="equipment_image_file" class="form-label">Quantity In Stock</label>
                                     <input class="form-control" type="number" name="equipment_quantity" id="equipment_quantity" value="">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="equipment_image" class="form-label">Equipment Image</label>
-                                    <input class="form-control" type="text" name="equipment_image" id="equipment_image" placeholder="Enter Equipment Image File Name" value="">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="equipment_image_file" class="form-label">Equipment Image File</label>
