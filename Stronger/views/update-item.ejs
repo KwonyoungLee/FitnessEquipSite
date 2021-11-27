@@ -1,0 +1,70 @@
+<!doctype html>
+    <html lang="en">
+
+    <head>
+        <%- include ('partials/header') %>
+        <script>
+            var equipment_id = "<%= id %>"
+        </script>
+        <script type="text/javascript" src="/javascripts/update-item.js"></script>
+    </head>
+
+    <body>
+        <%- include ('partials/navbar') %>
+
+        <!-- User info and History -->
+        <div class="container">
+            <div class="main d-flex justify-content-center">
+                <div class="row login-custom">
+                    <h2>Update Item</h2>
+                    <div class="card m-2 p-4">
+                        <div class="card-body">
+                            <form action="/equipment/update/<%=id%>" method="POST">
+                                <div class="form-group mb-3">
+                                    <label for="equipment_name" class="form-label">Equipment Id</label>
+                                    <input type="text" class="form-control" id="equipment_id" placeholder="Enter Equipment Name" value="" readonly>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_name" class="form-label">Equipment Name</label>
+                                    <input type="text" class="form-control" name="equipment_name" id="equipment_name" placeholder="Enter Equipment Name" value="">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_price" class="form-label">Equipment Price</label>
+                                    <input type="number" class="form-control" name="equipment_price" id="equipment_price" placeholder="Enter Equipment Price" value="">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_description" class="form-label">Equipment Description</label>
+                                    <br>
+                                    <textarea rows="5" cols="58" name="equipment_description" id="equipment_description"></textarea>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_category" class="form-label">Equipment Category</label>
+                                    <input type="text" class="form-control" name="equipment_category" id="equipment_category" placeholder="Enter Equipment Category" value="">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_image_file" class="form-label">Quantity In Stock</label>
+                                    <input class="form-control" type="number" name="equipment_quantity" id="equipment_quantity" value="">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_image" class="form-label">Equipment Image</label>
+                                    <input class="form-control" type="text" name="equipment_image" id="equipment_image" placeholder="Enter Equipment Image File Name" value="">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="equipment_image_file" class="form-label">Equipment Image File</label>
+                                    <input class="form-control" type="file" name="equipment_image_file" id="equipment_image_file" value="">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                            <br>
+                            <a href="/equipment/<%=id%>"><button class="btn btn-secondary">Cancel</button></a>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <%- include ('partials/footer') %>
+        </footer>
+    </body>
+
+</html>
