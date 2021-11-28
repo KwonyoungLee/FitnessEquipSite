@@ -12,7 +12,7 @@ var collection = db.get('Equipment');
 router.get('/', function(req, res, next) {
   var pagelimit = 8;
   var page = req
-  collection.find({},function(err,equipment){
+  collection.find({deleted : "0"},function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
@@ -35,14 +35,14 @@ router.get('/categories',function(req,res,next){
 router.get('/page/:pagenumber', function(req, res, next) {
   var pagelimit = 8;
   var page = req.params.pagenumber;
-  collection.find({},{limit : pagelimit, skip : ((pagelimit * page) - pagelimit) },function(err,equipment){
+  collection.find({deleted : "0"},{limit : pagelimit, skip : ((pagelimit * page) - pagelimit) },function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
 });
 
 router.get('/:id', function(req, res, next) {
-  collection.findOne({_id : req.params.id },function(err,equipment){
+  collection.findOne({_id : req.params.id},function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
