@@ -16,7 +16,8 @@ $(document).ready(function () {
                     equipment_name: item.item_name,
                     equipment_price: item.item_price,
                     equipment_image: item.item_image,
-                    quantity: item.item_quantity
+                    quantity: item.item_quantity,
+                    in_stock: item.item_qty_in_stock
                 }
 
                 var price = calculateTotal(item.item_price, item.item_quantity)
@@ -64,7 +65,8 @@ $(document).ready(function () {
                         equipment_name: item.item_name,
                         equipment_price: item.item_price,
                         equipment_image: item.item_image,
-                        quantity: item.item_quantity
+                        quantity: item.item_quantity,
+                        in_stock: item.item_qty_in_stock
                     }
                     
                 var price = calculateTotal(item.item_price, item.item_quantity)
@@ -168,27 +170,29 @@ $(document).ready(function () {
         console.log(order);
 
         //UPDATE QUANTITY IN INVENTORY
-        // equipment_items.forEach(function(i){
-        //     console.log(i);
-        //     console.log("updating quantity:" + i);
-        //     console.log(i.quantity)
-        //     var i_quantity = {quantity_in_stock : i.quantity }
-        //     console.log(i_quantity)
-        //     $.ajax({
-        //         method: 'PUT',
-        //         url: '/api/equipment/' + i.equipment_name,
-        //         data: JSON.stringify(i_quantity),
-        //         contentType: "application/json; charset=utf-8",
-        //         dataType: "json",
-        //         success: function(item){
-        //             console.log(item)
-        //             console.log("success returned");
-        //         },
-        //         error: function(){
-        //             alert("Error updating quantity");
-        //         },
-        //     });
-        // })
+        equipment_items.forEach(function(i){
+            console.log(i);
+            console.log("updating quantity:" + i);
+            var qty = parseInt(i.in_stock) - parseInt(i.quantity)
+            i.quantity = qty.toString()
+            console.log(i.quantity)
+            var i_quantity = {quantity_in_stock : i.quantity }
+            console.log(i_quantity)
+            $.ajax({
+                method: 'POST',
+                url: '/api/equipment/' + i.equipment_name,
+                data: JSON.stringify(i_quantity),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(item){
+                    console.log(item)
+                    console.log("success returned");
+                },
+                error: function(){
+                    alert("Error updating quantity in INVENTORY");
+                },
+            });
+        })
 
         //POST customer object
         $.ajax({

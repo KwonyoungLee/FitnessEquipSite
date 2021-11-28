@@ -2,6 +2,7 @@ var equipment_name = ""
 var equipment_price = ""
 var equipment_image = ""
 var image_src = ""
+var equipment_quantity = ""
 
 $(document).ready(function(){
 
@@ -15,6 +16,7 @@ $(document).ready(function(){
 
 		 	equipment_name = data.item_name;
 		 	equipment_price = data.price;
+			equipment_quantity = data.quantity_in_stock
 
 		 	$("#equipment-img").attr("src",image_src);
 		 	$("#equipment-img").attr("alt",data.item_name);
@@ -55,7 +57,8 @@ $(document).ready(function(){
             "item_name" : equipment_name,
             "item_price" : equipment_price,
             "item_quantity" : order_quantity,
-            "item_image" : equipment_image
+            "item_image" : equipment_image,
+			"item_qty_in_stock" : equipment_quantity
 		}
 
 		$.ajax({

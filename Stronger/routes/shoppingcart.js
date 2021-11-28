@@ -41,7 +41,8 @@ router.post('/update/:username',function(req,res,next){
       item_name : req.body.item_name,
       item_price : req.body.item_price,
       item_quantity : req.body.item_quantity,
-      item_image : req.body.item_image
+      item_image : req.body.item_image,
+      item_qty_in_stock : req.body.item_qty_in_stock
     }
     if (current_shoppingcart.items == "")
     {
