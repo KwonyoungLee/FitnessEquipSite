@@ -86,7 +86,7 @@ $(document).ready(function () {
     $("#items_card").on("change","#qty", function(){
         var item_name = $(this).attr("data-name");
         var qty_obj = {item_quantity: $(this).val()};
-        var qty = $(this).val();
+        var i_qty = $(this).val();
         console.log(equipment_items);
         $.ajax({
         method: 'PUT',
@@ -97,7 +97,7 @@ $(document).ready(function () {
             equipment_items.forEach(function(i){
                 console.log(i);
                 if(i.equipment_name == item_name){
-                    i.quantity = qty
+                    i.quantity = i_qty
                 }
                 console.log(i.equipment_quantity)
                 t_price += calculateTotal(i.equipment_price, i.quantity)
@@ -173,11 +173,9 @@ $(document).ready(function () {
         equipment_items.forEach(function(i){
             console.log(i);
             console.log("updating quantity:" + i);
-            var qty = parseInt(i.in_stock) - parseInt(i.quantity)
-            i.quantity = qty.toString()
-            console.log(i.quantity)
-            var i_quantity = {quantity_in_stock : i.quantity }
-            console.log(i_quantity)
+            var stock_qty = parseInt(i.in_stock) - parseInt(i.quantity)
+            i.in_stock = stock_qty.toString()
+            var i_quantity = {quantity_in_stock : i.in_stock }
             $.ajax({
                 method: 'POST',
                 url: '/api/equipment/' + i.equipment_name,

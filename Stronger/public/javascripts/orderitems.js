@@ -28,7 +28,7 @@ $(document).ready(function(){
                 // $("#price").append("$" + order.order[i].equipment_price);
                 // $("#quantity").append(order.order[i].quantity);
             });
-            $("#total").append("$" + order.total_price);
+            $("#total").append("$" + Number(order.total_price).toFixed(2));
     },
         error: function(){
             alert("Error loading orders");
