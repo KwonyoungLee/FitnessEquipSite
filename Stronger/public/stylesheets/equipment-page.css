@@ -6,3 +6,9 @@
 button{
 	text-align: center;
 }
+
+.buttons{
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}

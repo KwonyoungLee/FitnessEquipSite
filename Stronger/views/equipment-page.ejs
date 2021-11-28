@@ -3,7 +3,7 @@
   <head>
     <%- include ('partials/header') %>
     <script src="/javascripts/equipment-page.js"></script>
-    <link href="/stylesheets/equipment-page.css">
+    <link rel="stylesheet" href="/stylesheets/equipment-page.css">
     <script>
       var equipment_id = "<%= id %>"
       <% if (user) { %> 
@@ -78,8 +78,12 @@
                   Add To Cart
                 </button>
                 <% if(user.username == "admin") { %>
-                    <button type="button" class="btn btn-info">Update</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <div class="buttons">
+                      <button type="button" class="btn btn-info">Update</button>
+                      <form action="/equipment/<%=id %>/delete?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
                 <% }} else { %>
                 <a href="/customers/login"><button id="add-to-cart-button" class="btn btn-primary">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
