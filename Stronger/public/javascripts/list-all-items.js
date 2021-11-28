@@ -12,7 +12,6 @@ $(document).ready(function(){
                 <div class=col-2>`+ item.category +`</div>
                 <div class=col-3>`+ item.image +`</div>
                 <div class=col-1>`+ item.quantity_in_stock +`</div>
-                <div class=col-1>`+ item.deleted +`</div>
                 </div>`
                 )
                 // $("#item_name").append(item.item_name + `<br>`)

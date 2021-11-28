@@ -12,7 +12,7 @@ var collection = db.get('Equipment');
 router.get('/', function(req, res, next) {
   var pagelimit = 8;
   var page = req
-  collection.find({},function(err,equipment){
+  collection.find({deleted : "0"},function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
@@ -35,14 +35,14 @@ router.get('/categories',function(req,res,next){
 router.get('/page/:pagenumber', function(req, res, next) {
   var pagelimit = 8;
   var page = req.params.pagenumber;
-  collection.find({},{limit : pagelimit, skip : ((pagelimit * page) - pagelimit) },function(err,equipment){
+  collection.find({deleted : "0"},{limit : pagelimit, skip : ((pagelimit * page) - pagelimit) },function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
 });
 
 router.get('/:id', function(req, res, next) {
-  collection.findOne({_id : req.params.id },function(err,equipment){
+  collection.findOne({_id : req.params.id},function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })
@@ -97,16 +97,17 @@ router.post('/:id/update',function(req,res,next){
 })
 
 /* UPDATE PARTICULAR EQUIPMENT QUANTITY*/
-// router.put('/:item_name', function(req,res){
-//   console.log("in post route")
-//   console.log("req" + req.body.i_quantity);
-//   collection.update({item_name: req.params.item_name},
-//     { $inc: {$toInt: '$quantity_in_stock'} -req.body.quantity_in_stock}
-//     , function(err, equipment){
-//       if(err) throw err;
-//       res.json(equipment)
-//     })
-// });
+router.post('/:item_name', function(req,res){
+  console.log("in post route")
+  console.log("req" + req.body.quantity_in_stock);
+  collection.update({item_name: req.params.item_name},
+    {
+      $set: {quantity_in_stock : req.body.quantity_in_stock}}
+    , function(err, equipment){
+      if(err) throw err;
+      res.json(equipment)
+    })
+});
 
 
 module.exports = router;

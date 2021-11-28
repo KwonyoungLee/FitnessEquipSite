@@ -8,7 +8,7 @@ $(document).ready(function () {
                 console.log(total_price);
                 $("#id").append(`<a href="/orderitems?id=` + order._id + `">` + order._id + `</a><br>`);
                 $("#date").append(order.date + '<br>');
-                $("#total_price").append(`$` + order.total_price + '<br>');
+                $("#total_price").append(`$` + Number(order.total_price).toFixed(2) + '<br>');
             });
         },
         error: function () {
