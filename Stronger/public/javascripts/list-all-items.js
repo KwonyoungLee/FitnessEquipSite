@@ -8,7 +8,7 @@ $(document).ready(function(){
 
                 $("#items_list").after(`<div class=row>
                 <div class=col-4>`+ item.item_name +`</div>
-                <div class=col-1>` + item.price + `</div>
+                <div class=col-1>$` + item.price + `</div>
                 <div class=col-2>`+ item.category +`</div>
                 <div class=col-3>`+ item.image +`</div>
                 <div class=col-1>`+ item.quantity_in_stock +`</div>
