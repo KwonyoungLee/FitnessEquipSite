@@ -10,6 +10,9 @@
     <script>
       var user_username = "<%= user.username %>" 
     </script>
+        <script>
+          var user_dob = "<%= user.date_of_birth %>" 
+        </script>
 </head>
 
 <body>
@@ -24,12 +27,12 @@
           <div class="col-9">
             <div class="row">
               <h3>Order History</h3>
-              <div class="col-4">Name: <%=user.first_name %> <%=user.last_name %> <br>Email: <%=user.username %><br>DOB: <%=user.date_of_birth %><br>
+              <div class="col-4"><%=user.first_name %> <%=user.last_name %> <br><%=user.username %><div id="dob"></div><br>
                 <p id="address"></p>
               <br></div>
-              <div class="col-3" id="id">Order ID<br></div>
-              <div class="col-2" id="date">Order Date<br></div>
-              <div class="col" id="total_price">Total Price<br></div>
+              <div class="col-3" id="id"><h5>Order ID</h5><br></div>
+              <div class="col-2" id="date"><h5>Order Date</h5><br></div>
+              <div class="col" id="total_price"><h5>Total Price</h5><br></div>
               <!-- <ul id="orderlist"></ul> -->
             </div>
           </div>
