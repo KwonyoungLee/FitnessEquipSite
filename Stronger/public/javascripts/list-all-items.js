@@ -14,12 +14,6 @@ $(document).ready(function(){
                 <div class=col-1>`+ item.quantity_in_stock +`</div>
                 </div>`
                 )
-                // $("#item_name").append(item.item_name + `<br>`)
-                // $("#item_price").append(item.price + `<br>`)
-                // $("#item_category").append(item.category + `<br>`)
-                // $("#item_image").append(item.image + `<br>`)
-                // $("#item_quantity").append(item.quantity_in_stock + `<br>`)
-                // $("#item_deleted").append(item.deleted + `<br>`)
             });
     },
         error: function(){
