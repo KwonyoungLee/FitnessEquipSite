@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	var validUsername = false;
 
 	$('input[name=fname]').change(function(){
 		var fname = $('#fname').val();
@@ -64,11 +64,13 @@ $(document).ready(function(){
 						$('input#username').css("border","3px solid red");
 						$('p#username-require').css("color","red");
 						$('p#username-require').html("A user with that username already exists");
+						validUsername = false;
 					}
 					else{
 						$('input#username').css("border","3px solid green");
 						$('p#username-require').css("color","green");
 						$('p#username-require').html("Valid username");
+						validUsername = true;
 					}
 
 				},
@@ -126,6 +128,25 @@ $(document).ready(function(){
 
 	});	
 
+	$('#signup_form').submit(function(event){
+		var password = $('#password').val();
+			var confirmpwd = $('#confirmpwd').val();
+	/*		if (confirmpwd == ""){
+				$('input#confirmpwd').css("border","3px solid red");
+				$('p#confirmpwd-require').css("color","red");
+				$('p#confirmpwd-require').html("Enter your repeat password");				
+			}*/
+
+			if (confirmpwd === password){				
+			}
+			else{	
+				event.preventDefault();			
+			}
+
+			if (validUsername == false){
+				event.preventDefault();
+			}
+	})
 /*	$('input[name=fname]').blur(function(){
 		$(this).removeAttr('style');
 		$('p#fname-require').empty();
