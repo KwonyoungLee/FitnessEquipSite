@@ -3,7 +3,7 @@ var router = express.Router();
 var monk = require('monk');
 
 //get db object
-var db = monk('localhost:27017/Stronger');
+var db = monk('127.0.0.1:27017/Stronger');
 var collection = db.get('Orders');
 
 

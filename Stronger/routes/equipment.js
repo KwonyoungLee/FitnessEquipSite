@@ -12,7 +12,7 @@ var collection = db.get('Equipment');
 router.get('/', function(req, res, next) {
   var pagelimit = 8;
   var page = req
-  collection.find({deleted : "0"},function(err,equipment){
+  collection.find({"deleted" : "0"},{sort: {'item_name': -1}},function(err,equipment){
     if (err) throw err;
     res.json(equipment);
   })

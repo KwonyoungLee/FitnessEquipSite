@@ -1,5 +1,6 @@
 $(document).ready(function () {
-
+    var dob_string = new Date(user_dob).toDateString()
+    $("#dob").append("<b>Date of Birth</b><br> " + dob_string)
     $.ajax({
         method: 'GET',
         url: '/orders?customerid=' + user_id,
@@ -21,13 +22,13 @@ $(document).ready(function () {
         url: '/customers/' + user_username,
         success: function (user) {
             if (user.billing_address != "" && user.billing_address.bill_apt != "") {
-                $("#address").append(`Address: <br>` + user.billing_address.bill_address + `<br>` +
+                $("#address").append(`<b>Primary Address</b> <br>` + user.billing_address.bill_address + `<br>` +
                     user.billing_address.bill_apt + `<br>` + user.billing_address.bill_city + `, `
                     + user.billing_address.bill_state + ` ` + user.billing_address.bill_zip +
                     `<br>` + user.billing_address.bill_country);
             }
             else if (user.billing_address != ""){
-                $("#address").append(`Address: <br>` + user.billing_address.bill_address + `<br>` + user.billing_address.bill_city + `, `
+                $("#address").append(`<b>Primary Address</b> <br>` + user.billing_address.bill_address + `<br>` + user.billing_address.bill_city + `, `
                 + user.billing_address.bill_state + ` ` + user.billing_address.bill_zip +
                 `<br>` + user.billing_address.bill_country);
             }

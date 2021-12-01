@@ -32,6 +32,11 @@
     color: #1e2832;
   }
 
+  /* nav-link for the footer */
+  .nav-link-footer {
+    color:#FFFFFF
+  }
+
   .active {
     background-color: white;
     color: black;
