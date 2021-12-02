@@ -29,6 +29,7 @@ $(document).ready(function(){
 							url: request_url,
 							dataType: "json",
 							success: function(data) {
+								current_page = index + 1;
 								$("#equipment-card-area").empty();
 								$.each(data, function(k,v) {
 									var equipment_id = v._id;
@@ -87,4 +88,121 @@ $(document).ready(function(){
 		},
 		error: function() { alert("error loading file");  }
 	});
+
+	$(document).ready(function(){
+		$.ajax({
+			url: '/api/equipment/categories',
+			dataType: "json",
+			success: function(categories) {
+				$.each(categories,function(k,category){
+					var new_category = $("<li></li>");
+					$(new_category).html('<a class="dropdown-item">' + category + '</a>');
+					$(new_category).on("click",function(){
+						$.ajax({
+							url: 'api/equipment/category/' + category,
+							dataType: "json",
+							success: function(data) {
+								$("#equipment-card-area").empty();
+								$("#pagination-ul").empty();
+								$("#filter_info").empty();
+								$.each(data, function(k,v) {
+									var equipment_id = v._id;
+									var equipment_name = v.item_name;
+									var price = v.price;
+									var image_src = v.image;
+									var description = v.description;
+									var card = '<div class="col">'+
+									'<div class="card h-100" style="width: 18rem;">' +
+									'<img src="/images/Equipment/'+ image_src + '" class="card-img-top" alt="' + equipment_name + '">' + 
+									'<div class="card-body">' +
+									'<h5 class="card-title"><a href="/equipment/'+ v._id +'">' + equipment_name + '</a></h5>' +
+									'<p class="card-text">$' + price + '</p>' +
+									'</div>' +
+									'</div>'	+
+									'</div>'
+
+									$("#equipment-card-area").append(card)
+								})
+
+								var filter_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
+								'<h3><span class="badge bg-warning text-dark">Filtered Results By "' + category + '"'
+								'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+								' </div>'
+
+								$("#filter_info").append(filter_badge)
+
+							},error: function(err){
+
+							}
+						})
+					})
+					$('#categories-dropdown').append(new_category)
+				})
+			},
+			error: function() { 
+				alert("error loading file");  
+			}
+		})
+
+		$("#search_button").on("click",function(event){
+			event.preventDefault();
+			var search_string = $("#search").val();
+			var exists=false;
+			if(search_string !== ""){
+				$.ajax({
+					url : "/api/equipment/search/" + search_string,
+					dataType: "json",
+					success: function(data){
+						$("#equipment-card-area").empty();
+						$("#pagination-ul").empty();
+						$("#filter_info").empty();
+						$.each(data, function(k,v) {
+							exists=true;
+							var equipment_id = v._id;
+							var equipment_name = v.item_name;
+							var price = v.price;
+							var image_src = v.image;
+							var description = v.description;
+							var card = '<div class="col">'+
+							'<div class="card h-100" style="width: 18rem;">' +
+							'<img src="/images/Equipment/'+ image_src + '" class="card-img-top" alt="' + equipment_name + '">' + 
+							'<div class="card-body">' +
+							'<h5 class="card-title"><a href="/equipment/'+ v._id +'">' + equipment_name + '</a></h5>' +
+							'<p class="card-text">$' + price + '</p>' +
+							'</div>' +
+							'</div>'	+
+							'</div>'
+
+							$("#equipment-card-area").append(card)
+
+						})
+						var search_badge = "";
+
+						if(exists)
+						{
+							search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
+							'<h3><span class="badge bg-warning text-dark">Showing Results for "' + search_string + '"'
+							'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							' </div>'
+						}
+						else
+						{
+							search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
+							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '"'
+							'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							' </div>'	
+						}
+
+						$("#filter_info").append(search_badge)
+					},
+					error: function(){
+						alert("Error searching")
+					}
+				})
+			}
+
+		})
+
+	})
+
 });

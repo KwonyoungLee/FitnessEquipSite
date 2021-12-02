@@ -32,6 +32,19 @@ router.get('/categories',function(req,res,next){
   })
 })
 
+router.get('/search/:search_string',function(req,res,next){
+  var itemSearchString = new RegExp(req.params.search_string);
+  collection.find({item_name : itemSearchString},function(err,equipment){
+    res.json(equipment)
+  })
+})
+
+router.get('/category/:category_name',function(req,res,next){
+  collection.find({ category : req.params.category_name}, function(err,equipment){
+    res.json(equipment)
+  })
+})
+
 router.get('/page/:pagenumber', function(req, res, next) {
   var pagelimit = 8;
   var page = req.params.pagenumber;
@@ -42,6 +55,7 @@ router.get('/page/:pagenumber', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
+  console.log("Within the right function")
   collection.findOne({_id : req.params.id},function(err,equipment){
     if (err) throw err;
     res.json(equipment);
@@ -98,7 +112,6 @@ router.post('/:id/update',function(req,res,next){
 
 /* UPDATE PARTICULAR EQUIPMENT QUANTITY*/
 router.post('/:item_name', function(req,res){
-  console.log("in post route")
   console.log("req" + req.body.quantity_in_stock);
   collection.update({item_name: req.params.item_name},
     {

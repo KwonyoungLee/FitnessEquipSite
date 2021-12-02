@@ -8,10 +8,10 @@
         <a class="navbar-brand" href="/"> 
           <img src="/images/logo/logo-white.png" alt="stronger company logo" width="150" height="150">
         </a>
-        <form class="d-flex search-custom">
+        <form class="d-flex search-custom" id="search_form">
           <label for="search" hidden></label>
             <input type="text" class="form-control user-search" id="search" name="search" placeholder="Search..">   
-            <button type="submit" class="btn search-button"><i class="fas fa-search"></i></button>
+            <button class="btn search-button" id="search_button"><i class="fas fa-search"></i></button>
         </form>
         <ul class="nav justify-content-center">
           <% if(locals.message){ 
