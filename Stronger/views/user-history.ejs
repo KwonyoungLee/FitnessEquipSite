@@ -6,13 +6,12 @@
     <script src="/javascripts/orders.js"></script>
     <script>
       var user_id = "<%= user._id %>"
-      </script>
-    <script>
+      var user_firstname = "<%= user.first_name%>"
+      var user_lastname = "<%= user.last_name%>"
       var user_username = "<%= user.username %>" 
+      var user_dob = "<%= user.date_of_birth %>" 
     </script>
-        <script>
-          var user_dob = "<%= user.date_of_birth %>" 
-        </script>
+
 </head>
 
 <body>
@@ -27,7 +26,10 @@
           <div class="col-9">
             <div class="row">
               <h3>Order History</h3>
-              <div class="col-4"><%=user.first_name %> <%=user.last_name %> <br><%=user.username %><div id="dob"></div><br>
+              <div class="col-4">
+                <div id="name"></div>
+                <div id="username"></div>
+                <div id="dob"></div><br>
                 <p id="address"></p>
               <br></div>
               <div class="col-3" id="id"><h5>Order ID</h5><br></div>

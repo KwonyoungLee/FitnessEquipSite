@@ -1,6 +1,10 @@
 $(document).ready(function () {
     var dob_string = new Date(user_dob).toDateString()
-    $("#dob").append("<b>Date of Birth</b><br> " + dob_string)
+
+    $("#name").append(user_firstname + " " + user_lastname);
+    $("#username").append(user_username);
+    $("#dob").append("<br><b>Date of Birth</b><br> " + dob_string);
+
     $.ajax({
         method: 'GET',
         url: '/orders?customerid=' + user_id,
