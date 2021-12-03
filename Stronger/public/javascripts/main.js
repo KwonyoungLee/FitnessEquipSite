@@ -125,8 +125,8 @@ $(document).ready(function(){
 								})
 
 								var filter_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
-								'<h3><span class="badge bg-warning text-dark">Filtered Results By "' + category + '"'
-								'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+								'<h3><span class="badge bg-warning text-dark">Filtered Results By "<span id="filter">' + category +
+								'</span>"<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
 								' </div>'
 
 								$("#filter_info").append(filter_badge)
@@ -144,11 +144,65 @@ $(document).ready(function(){
 			}
 		})
 
+
+
 		$("#search_button").on("click",function(event){
 			event.preventDefault();
 			var search_string = $("#search").val();
+			var category = $("#filter").html();
 			var exists=false;
-			if(search_string !== ""){
+			if(search_string.length > 0 && $("#filter").length > 0){
+				$.ajax({
+					url : "/api/equipment/filter/search/" + search_string + "/" + category,
+					dataType: "json",
+					success: function(data){
+						$("#equipment-card-area").empty();
+						$("#pagination-ul").empty();
+						$("#filter_info").empty();
+						$.each(data, function(k,v) {
+							exists=true;
+							var equipment_id = v._id;
+							var equipment_name = v.item_name;
+							var price = v.price;
+							var image_src = v.image;
+							var description = v.description;
+							var card = '<div class="col">'+
+							'<div class="card h-100" style="width: 18rem;">' +
+							'<img src="/images/Equipment/'+ image_src + '" class="card-img-top" alt="' + equipment_name + '">' + 
+							'<div class="card-body">' +
+							'<h5 class="card-title"><a href="/equipment/'+ v._id +'">' + equipment_name + '</a></h5>' +
+							'<p class="card-text">$' + price + '</p>' +
+							'</div>' +
+							'</div>'	+
+							'</div>'
+
+							$("#equipment-card-area").append(card)
+
+						})
+						var filter_search_badge = "";
+
+						if(exists)
+						{
+							filter_search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
+							'<h3><span class="badge bg-warning text-dark">Showing Results for "' + search_string + '" in category "<span id="filter">' + category +
+							'</span>"<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							' </div>'
+						}
+						else
+						{
+							filter_search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
+							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '" in category "' + category + '"' +
+							'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							' </div>'	
+						}
+
+						$("#filter_info").append(filter_search_badge)				
+						},error: function(){
+						alert("Error searching")
+					}
+				})
+			}
+			else if(search_string.length > 0 && $("#filter").length == 0){
 				$.ajax({
 					url : "/api/equipment/search/" + search_string,
 					dataType: "json",

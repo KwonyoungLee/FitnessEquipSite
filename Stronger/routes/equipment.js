@@ -45,6 +45,13 @@ router.get('/category/:category_name',function(req,res,next){
   })
 })
 
+router.get('/filter/search/:search_string/:category_name',function(req,res,next){
+  var itemSearchString = new RegExp(req.params.search_string);
+  collection.find({item_name : itemSearchString, category : req.params.category_name},function(err,equipment){
+    res.json(equipment)
+  })
+})
+
 router.get('/page/:pagenumber', function(req, res, next) {
   var pagelimit = 8;
   var page = req.params.pagenumber;
