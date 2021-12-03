@@ -90,16 +90,9 @@ $(document).ready(function(){
 	});
 
 	$(document).ready(function(){
-		$.ajax({
-			url: '/api/equipment/categories',
-			dataType: "json",
-			success: function(categories) {
-				$.each(categories,function(k,category){
-					var new_category = $("<li></li>");
-					$(new_category).html('<a class="dropdown-item">' + category + '</a>');
-					$(new_category).on("click",function(){
+		if(category.length != 0){
 						$.ajax({
-							url: 'api/equipment/category/' + category,
+							url: '/api/equipment/category/' + category,
 							dataType: "json",
 							success: function(data) {
 								$("#equipment-card-area").empty();
@@ -135,14 +128,8 @@ $(document).ready(function(){
 
 							}
 						})
+					}
 					})
-					$('#categories-dropdown').append(new_category)
-				})
-			},
-			error: function() { 
-				alert("error loading file");  
-			}
-		})
 
 
 
@@ -191,8 +178,8 @@ $(document).ready(function(){
 						else
 						{
 							filter_search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
-							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '" in category "' + category + '"' +
-							'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '" in category "<span id="filter">' + category +
+							'</span>"<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
 							' </div>'	
 						}
 
@@ -257,6 +244,5 @@ $(document).ready(function(){
 
 		})
 
-	})
-
 });
+

@@ -4,7 +4,7 @@ $(document).ready(function(){
 		 dataType: "json",
 		 success: function(categories) {
 		 	$.each(categories,function(k,category){
-		 		$('#categories-dropdown').append('<li><a class="dropdown-item" href="#">' + category + '</a></li>')
+		 		$('#categories-dropdown').append('<li><a class="dropdown-item" href="/page/'+ category + '">' + category + '</a></li>')
 		 	})
 		 },
 		 error: function() { alert("error loading file");  }

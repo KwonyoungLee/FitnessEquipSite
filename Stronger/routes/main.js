@@ -25,7 +25,11 @@ const destination = path.join(__dirname,'./../public/images/Equipment/');
 
 /* GET main home page. */
 router.get('/', function(req, res, next) {
-  res.render('main', { user : req.user, message: req.flash() });
+  res.render('main', { user : req.user, message: req.flash(), filter: "" });
+});
+
+router.get('/page/:category', function(req, res, next) {
+  res.render('main', { user : req.user, message: req.flash(), filter: req.params.category });
 });
 
 /* GET equipment page. */
