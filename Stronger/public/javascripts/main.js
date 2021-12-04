@@ -119,7 +119,7 @@ $(document).ready(function(){
 
 								var filter_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
 								'<h3><span class="badge bg-warning text-dark">Filtered Results By "<span id="filter">' + category +
-								'</span>"<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+								'</span>"<a href="/"><button type="button" class="btn-close" aria-label="Close"></button></a></span><h3>'
 								' </div>'
 
 								$("#filter_info").append(filter_badge)
@@ -172,14 +172,14 @@ $(document).ready(function(){
 						{
 							filter_search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
 							'<h3><span class="badge bg-warning text-dark">Showing Results for "' + search_string + '" in category "<span id="filter">' + category +
-							'</span>"<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							'</span>"<a href="/"><button type="button" class="btn-close" aria-label="Close"></button></a></span><h3>'
 							' </div>'
 						}
 						else
 						{
 							filter_search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
 							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '" in category "<span id="filter">' + category +
-							'</span>"<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							'</span>"<a href="/"><button type="button" class="btn-close" aria-label="Close"></button></a></span><h3>'
 							' </div>'	
 						}
 
@@ -222,15 +222,15 @@ $(document).ready(function(){
 						if(exists)
 						{
 							search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
-							'<h3><span class="badge bg-warning text-dark">Showing Results for "' + search_string + '"'
-							'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							'<h3><span class="badge bg-warning text-dark">Showing Results for "' + search_string + '"' +
+							'<a href="/"><button type="button" class="btn-close" aria-label="Close"></button></a></span><h3>'
 							' </div>'
 						}
 						else
 						{
 							search_badge = '<div class="col-md-6 mt-3 mb-3 mx-2">' +
-							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '"'
-							'<button type="button" class="btn-close" aria-label="Close"></button></span><h3>'
+							'<h3><span class="badge bg-warning text-dark">No Results for "' + search_string + '"' +
+							'<a href="/"><button type="button" class="btn-close" aria-label="Close"></button></a></span><h3>'
 							' </div>'	
 						}
 
