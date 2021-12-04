@@ -4,11 +4,12 @@ $(document).ready(function(){
 	$('input[name=fname]').change(function(){
 		var fname = $('#fname').val();
 		var fname_pattern = /[a-zA-Z]+$/;
-		if(fname == ""){
+/*		if(fname == ""){
 			$('input#fname').css("border","3px solid red");
 			$('p#fname-require').css("color","red");
 			$('p#fname-require').html("Enter your name");			
 		}
+		*/
 		if(fname.match(fname_pattern)){
 			$('input#fname').css("border","3px solid green");
 			$('p#fname-require').css("color","green");
@@ -127,10 +128,23 @@ $(document).ready(function(){
 		}
 
 	});	
+	$('input#dob').change(function(){
+		var dob = $('#dob').val();
+		if(dob != ""){
+			$('input#dob').css("border","3px solid green");
+			$('p#dob-require').css("color","green");
+			$('p#dob-require').html("");					
+		}
+	})
+
 
 	$('#signup_form').submit(function(event){
+		var fname = $('#fname').val();
+		var lname = $('#lname').val();
+		var user = $('#username').val();
 		var password = $('#password').val();
-			var confirmpwd = $('#confirmpwd').val();
+		var confirmpwd = $('#confirmpwd').val();
+		var dob = $('#dob').val();
 	/*		if (confirmpwd == ""){
 				$('input#confirmpwd').css("border","3px solid red");
 				$('p#confirmpwd-require').css("color","red");
@@ -145,6 +159,36 @@ $(document).ready(function(){
 
 			if (validUsername == false){
 				event.preventDefault();
+			}
+
+			if(fname == ""){
+				$('input#fname').css("border","3px solid red");
+				$('p#fname-require').css("color","red");
+				$('p#fname-require').html("Enter your name");	
+			}
+			if(lname == ""){
+				$('input#lname').css("border","3px solid red");
+				$('p#lname-require').css("color","red");
+				$('p#lname-require').html("Enter your name");					
+			}
+			if(user == ""){
+				$('input#username').css("border","3px solid red");
+				$('p#username-require').css("color","red");
+				$('p#username-require').html("Enter your email");			
+			}
+			if(password == ""){
+				$('input#password').css("border","3px solid red");
+				$('p#pwd-require').css("color","red");				
+			}
+			if(confirmpwd == ""){
+				$('input#confirmpwd').css("border","3px solid red");
+				$('p#confirmpwd-require').css("color","red");
+				$('p#confirmpwd-require').html("Please confirm your password");					
+			}
+			if(dob == ""){
+				$('input#dob').css("border","3px solid red");
+				$('p#dob-require').css("color","red");
+				$('p#dob-require').html("Enter your date of birth");	
 			}
 	})
 /*	$('input[name=fname]').blur(function(){
