@@ -8,9 +8,6 @@ $(document).ready(function () {
         method: 'GET',
         url: '/api/shoppingcart/' + user_username,
         success: function (cart) {
-            console.log(cart);
-            console.log(cart.items);
-            console.log(cart.items[0].item_image);
             $.each(cart.items, function (i, item) {
                 var equipment = {
                     equipment_name: item.item_name,
@@ -22,7 +19,6 @@ $(document).ready(function () {
 
                 var price = calculateTotal(item.item_price, item.item_quantity)
                 tot_price += price;
-                console.log(price);
                 var quantity = JSON.parse(item.item_quantity)
                 var order_card = `<div id="equipment_card" class="card mb-5">
                 <img src="/images/Equipment/` + item.item_image + `" class="card-img-top" />
@@ -87,7 +83,6 @@ $(document).ready(function () {
         var item_name = $(this).attr("data-name");
         var qty_obj = {item_quantity: $(this).val()};
         var i_qty = $(this).val();
-        console.log(equipment_items);
         $.ajax({
         method: 'PUT',
         url: '/api/shoppingcart/' + user_username + "/" + item_name,
@@ -95,17 +90,12 @@ $(document).ready(function () {
         success: function (cart) {
             var t_price = 0
             equipment_items.forEach(function(i){
-                console.log(i);
                 if(i.equipment_name == item_name){
                     i.quantity = i_qty
                 }
-                console.log(i.equipment_quantity)
                 t_price += calculateTotal(i.equipment_price, i.quantity)
-                console.log(t_price);
                 tot_price = t_price
             })
-            console.log(cart);
-            console.log(tot_price);
             $("#total").text(`Order Total: $` + tot_price.toFixed(2));
         },
         error: function(){
@@ -123,7 +113,6 @@ $(document).ready(function () {
             return false;
         }
 
-        console.log(equipment_items);
         //Shipping variables
         var s_address = $("#ship_address").val();
         var s_apt = $("#ship_apt").val();
@@ -167,12 +156,8 @@ $(document).ready(function () {
             date: current_date
         }
 
-        console.log(order);
-
         //UPDATE QUANTITY IN INVENTORY
         equipment_items.forEach(function(i){
-            console.log(i);
-            console.log("updating quantity:" + i);
             var stock_qty = parseInt(i.in_stock) - parseInt(i.quantity)
             i.in_stock = stock_qty.toString()
             var i_quantity = {quantity_in_stock : i.in_stock }
@@ -183,8 +168,6 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(item){
-                    console.log(item)
-                    console.log("success returned");
                 },
                 error: function(){
                     alert("Error updating quantity in INVENTORY");
@@ -200,7 +183,6 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(customer){ 
-                console.log("in post customer");
             },
             error: function(){
                 alert("Error updating customer");
@@ -215,7 +197,6 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (o) {
-                console.log("in post order");
                 window.sessionStorage.setItem('order_no', o._id);
                 // window.location.replace("localhost:3000/confirmation");
             },
@@ -229,7 +210,6 @@ $(document).ready(function () {
             method: 'DELETE',
             url:'/api/shoppingcart/' + user_username,
             success: function(cart){ 
-                console.log(cart);
             },
             error: function(){
                 alert("Error deleting all items in shopping cart");
