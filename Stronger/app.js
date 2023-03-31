@@ -1,3 +1,5 @@
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -20,6 +22,8 @@ var ordersRouter = require('./routes/orders');
 var shoppingCart = require('./routes/shoppingcart')
 
 var app = express();
+
+
 
 // mongoose
 mongoose.connect('mongodb://127.0.0.1:27017/Stronger');
