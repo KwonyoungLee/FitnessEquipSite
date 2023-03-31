@@ -1,11 +1,11 @@
 {
-  "homepage": "https://kwonyounglee.github.io/FitnessEquipSite/Stronger",
+  //"homepage": "https://kwonyounglee.github.io/FitnessEquipSite/Stronger",
   "name": "stronger",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    //"predeploy": "npm run build",
+    //"deploy": "gh-pages -d build",
     "start": "node ./bin/www"
   },
   "dependencies": {
