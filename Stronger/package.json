@@ -6,7 +6,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "node main.js"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
