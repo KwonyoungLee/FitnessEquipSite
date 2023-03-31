@@ -6,7 +6,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node ./bin/index"
+    "start": "node index.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
