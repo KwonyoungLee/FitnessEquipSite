@@ -9,7 +9,10 @@ var lodash = require("lodash");
 //var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/?retryWrites=true&w=majority'
 //var db = monk(ADDRESS)
 
-var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/Stronger'
+var dotenv = require('dotenv');
+dotenv.config()
+//var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/Stronger'
+var ADDRESS =`${process.env.MONK_URI}`
 var db = monk(ADDRESS)
 var collection = db.get('Equipment');
 

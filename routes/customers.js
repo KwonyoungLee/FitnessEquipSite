@@ -8,12 +8,13 @@ var bodyParser = require('body-parser');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended : true}));
 
-
+var dotenv = require('dotenv');
+dotenv.config()
 //mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@stronger.bxwmgqx.mongodb.net/
 
 
-var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/Stronger'
-var db = monk(ADDRESS)
+//var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/Stronger'
+var db = monk(process.env.MONK_URI)
 var collection = db.get('CustomerInformation');
 
 var shoppingCartCollection = db.get('ShoppingCart')
