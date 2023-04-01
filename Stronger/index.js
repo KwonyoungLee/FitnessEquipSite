@@ -32,9 +32,9 @@ var port = process.env.PORT || 5050;
 console.log(port)
 
 // mongoose
-//var MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@stronger.bxwmgqx.mongodb.net/?retryWrites=true&w=majority`
-
-var MONGO_URL = 'mongodb://127.0.0.1:27017/Stronger'
+var MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@stronger.bxwmgqx.mongodb.net/?retryWrites=true&w=majority`
+//var MONGO_URL = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/test'
+//var MONGO_URL = 'mongodb://localhost:27017/?readPreference=primary&directConnection=true&ssl=false'
 mongoose.connect(MONGO_URL)
   .then(() => console.log("Connected to mongodb atlas"))
   .catch(err => console.log('error connecting', err))

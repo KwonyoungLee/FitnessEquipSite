@@ -9,10 +9,11 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended : true}));
 
 
-//var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/?retryWrites=true&w=majority'
-//var db = monk(ADDRESS)
+//mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@stronger.bxwmgqx.mongodb.net/
 
-var db = monk('127.0.0.1:27017/Stronger')
+
+var ADDRESS = '127.0.0.1:27017/Stronger'
+var db = monk(ADDRESS)
 var collection = db.get('CustomerInformation');
 
 var shoppingCartCollection = db.get('ShoppingCart')
