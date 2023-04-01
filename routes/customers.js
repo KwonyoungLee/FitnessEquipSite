@@ -12,7 +12,8 @@ router.use(bodyParser.urlencoded({ extended : true}));
 //mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@stronger.bxwmgqx.mongodb.net/
 
 
-var ADDRESS = '127.0.0.1:27017/Stronger'
+var ADDRESS = 'mongodb://lkyoung95:ai908Thlwcv6QBVH@47.186.253.135/32/Stronger'
+var db = monk(ADDRESS)
 var db = monk(ADDRESS)
 var collection = db.get('CustomerInformation');
 
