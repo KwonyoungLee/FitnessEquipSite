@@ -1,0 +1,124 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+    <%- include ('partials/header') %>
+    <script src="/javascripts/equipment-page.js"></script>
+    <link href="/stylesheets/equipment-page.css">
+    <link rel="stylesheet" href="/stylesheets/equipment-page.css">
+    <script>
+      var equipment_id = "<%= id %>"
+      <% if (user) { %> 
+        var username = "<%= user.username%>"
+        <% } %>
+      </script>
+    </head>
+    <body>
+      <%- include ('partials/navbar') %>
+      <!-- Specific Equipment Information-->
+      <div class="container ">
+        <!-- Modal -->
+        <div id="add-to-cart-success-modal" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Successfully Added to Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img id="modal-image" class="img-fluid" src="" alt= ""></img>
+                  </div>
+                  <div class="col-md-8">
+                    <p id="modal-item-name"></p>
+                    <br>
+                    <p id="modal-item-quantity"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button id="modal-close" type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5 mb-5">
+          <div class="col-md-8">
+            <img class = "mx-auto d-block" id="equipment-img" src="" alt="">
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="width: 25rem;">
+              <div class="card-body">
+                <h3 id="equipment-name" class="card-title"></h3>
+                <p id="equipment-price" class="card-text"></p>
+                <p class="card-text">Description: </p>
+                <p id="equipment-description" class="card-text"></p>
+                <% if (user && (user.username != "admin")) { %>
+                <p id="equipment-quantity" class="card-text">Quantity: </p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <button id="quantity-minus" class="btn btn-outline-secondary" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                      </button>
+                      <input id="quantity-input" type="text" class="form-control" value="1">
+                      <button id="quantity-plus" class="btn btn-outline-secondary" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button id="add-to-cart-button" class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                  </svg>
+                  Add To Cart
+                </button>
+                <% } else if(user && (user.username == "admin")) { %>  
+                    <div class="buttons">
+                      <a href="/equipment/update/<%= id%>"><button type="button" class="btn btn-info">Update</button></a>
+                      <form action="/equipment/<%=id %>/delete?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                <% } else { %>
+                <p id="equipment-quantity" class="card-text">Quantity: </p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <button id="quantity-minus" class="btn btn-outline-secondary" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                      </button>
+                      <input id="quantity-input" type="text" class="form-control" value="1">
+                      <button id="quantity-plus" class="btn btn-outline-secondary" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <a href="/customers/login"><button id="add-to-cart-button" class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                  </svg>
+                  Add To Cart
+                </button>
+              </a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <%- include ('partials/footer') %>
+    </footer>
+  </body>
+  </html>

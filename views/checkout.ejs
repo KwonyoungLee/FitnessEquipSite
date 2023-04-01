@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%- include ('partials/header') %>
+  <script src="/javascripts/checkout.js"></script>
+  <link href="/stylesheets/orderitems.css" rel="stylesheet">
+  <script>
+    var user_id = "<%= user._id %>" 
+  </script>
+    <script>
+      var user_username = "<%= user.username %>" 
+    </script>
+</head>
+
+<body>
+  <%- include ('partials/navbar') %>
+    <!-- Checkout -->
+    <div class="container">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-md-6 checkout-custom">
+          <div class="mb-5">
+            <!-- Cart Items -->
+            <h2>Items in Your Cart</h2>
+            <div id="items_card"></div>
+            <!-- <button id="remove" type="button" class="btn btn-white btn-lg" style="float: right;">Remove</button><br> -->
+          </div>
+          <div id="total" style="float: right;"></div><br>
+        <hr />
+          <!-- Shipping Info -->
+          <h2 class="mb-3">Enter Your Shipping Address</h2>
+          <form id="order_info" action="/confirmation">
+            <div class="form-group">
+              <label>Country/Region</label>
+
+              <select id="ship_country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>United States</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Full Name (First and Last name)</label>
+              <input class="form-control form-control-lg mb-2" type="text" name="name" id="ship_name" required />
+            </div>
+            <div class="form-group">
+              <label>Address</label>
+              <input class="form-control form-control-lg mb-2" type="text" name="address" id="ship_address" required />
+            </div>
+            <div class="form-group">
+              <label>Apt/Suite/Other (optional)</label>
+              <input class="form-control form-control-lg mb-2" type="text" name="apt" id="ship_apt" />
+            </div>
+            <div class="row g-4">
+              <div class="col">
+                <div class="form-group">
+                  <label>Zip code</label>
+                  <input class="form-control form-control-lg mb-2" type="text" name="zip" id="ship_zip" required />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>City</label>
+                  <input class="form-control form-control-lg mb-2" type="text" name="city" id="ship_city" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>State</label>
+              <select id="ship_state" class="form-select form-select-lg mb-5" aria-label=".form-select-lg example">
+                <option selected>TX</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+              </select>
+            </div>
+
+            <!-- Enter Billing Address -->
+            <h2 class="mb-3">Enter Your Billing Address</h2>
+            <form>
+              <div class="form-group">
+                <label>Country/Region</label>
+
+                <select id="bill_country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                  <option selected>United States</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Full Name (First and Last name)</label>
+                <input class="form-control form-control-lg mb-2" type="text" name="name" id="bill_name" required />
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input class="form-control form-control-lg mb-2" type="text" name="address" id="bill_address" required />
+              </div>
+              <div class="form-group">
+                <label>Apt/Suite/Other (optional)</label>
+                <input class="form-control form-control-lg mb-2" type="text" name="apt" id="bill_apt" />
+              </div>
+              <div class="row g-4">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Zip code</label>
+                    <input class="form-control form-control-lg mb-2" type="text" name="zip" id="bill_zip" required />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>City</label>
+                    <input class="form-control form-control-lg mb-2" type="text" name="city" id="bill_city" required />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>State</label>
+                <select id="bill_state" class="form-select form-select-lg mb-5" aria-label=".form-select-lg example">
+                  <option selected>TX</option>
+                  <option value="AL">AL</option>
+                  <option value="AK">AK</option>
+                  <option value="AZ">AZ</option>
+                  <option value="AR">AR</option>
+                  <option value="CA">CA</option>
+                  <option value="CO">CO</option>
+                  <option value="CT">CT</option>
+                </select>
+              </div>
+
+              <!-- Payment Information -->
+              <h2 class="mb-3">Enter Your Payment Information</h2>
+              <div class="form-group">
+                <label>Name on card</label>
+                <input class="form-control form-control-lg mb-2" type="text" name="name" id="card_name" />
+              </div>
+              <div class="form-group">
+                <label>Card number</label>
+                <div class="input-group" id="basic-addon2">
+                  <span class="input-group-text"><i class="bi bi-credit-card-fill"></i></span>
+                  <input class="form-control form-control-lg" type="text" name="card_number" id="card_number"
+                    aria-describedby="basic-addon2" />
+
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Expiration date</label>
+                  </div>
+                  <div class="row g-0">
+                    <div class="col">
+                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option selected>11</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="11">12</option>
+
+                      </select>
+                    </div>
+                    <div class="col">
+                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option selected>2021</option>
+                        <option value="1">2022</option>
+                        <option value="2">2023</option>
+                        <option value="3">2024</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Security code</label>
+                    <div class="input-group" id="basic-addon1">
+                      <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                      <input class="form-control form-control-lg" type="text" name="code" id="code"
+                        aria-describedby="basic-addon1" />
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="d-grid">
+                <button type="submit" id="btn_order" class="btn btn-default btn-lg">Place your order</button>
+              </div>
+            </form>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+
+    <footer>
+      <%- include ('partials/footer') %>
+    </footer>
+
+</body>
+
+</html>
