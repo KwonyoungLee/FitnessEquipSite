@@ -1,90 +1,101 @@
-#!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
 
-var app = require('./app');
-var debug = require('debug')('vidzy:server');
-var http = require('http');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var flash = require('connect-flash');
 
-/**
- * Get port from environment and store in Express.
- */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+//user authentication
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
 
-/**
- * Create HTTP server.
- */
+var mainRouter = require('./routes/main');
+var customersRouter = require('./routes/customers');
+var equipmentRouter = require('./routes/equipment');
+var ordersRouter = require('./routes/orders');
+var shoppingCart = require('./routes/shoppingcart')
 
-var server = http.createServer(app);
+var app = express();
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+var dotenv = require('dotenv');
+dotenv.config()
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
 
-/**
- * Normalize a port into a number, string, or false.
- */
+var port = process.env.PORT || 3000;
 
-function normalizePort(val) {
-  var port = parseInt(val, 10);
+console.log(port)
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+// mongoose
+//var MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@stronger.bxwmgqx.mongodb.net/?retryWrites=true&w=majority`
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+var MONGO_URL = 'mongodb://127.0.0.1:27017/Stronger'
+mongoose.connect(MONGO_URL)
+  .then(() => console.log("Connected to mongodb atlas"))
+  .catch(err => console.log('error connecting', err))
 
-  return false;
-}
 
-/**
- * Event listener for HTTP server "error" event.
- */
+app.listen(port, () => {
+  console.log("Server started at PORT", port);
+});
 
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
-/**
- * Event listener for HTTP server "listening" event.
- */
+//user authentication
+app.use(session({ 
+  secret: 'this-is-a-secret-token',
+  resave: true,
+  saveUninitialized: true
+ }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
+// passport config
+var Account = require('./models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+app.use('/', mainRouter);
+app.use('/customers',customersRouter)
+app.use('/api/equipment',equipmentRouter)
+app.use('/orders',ordersRouter)
+app.use('/api/shoppingcart',shoppingCart)
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+
+module.exports = app;
+
