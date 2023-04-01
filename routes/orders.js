@@ -9,7 +9,7 @@ var monk = require('monk');
 
 
 
-var ADDRESS = 'mongodb://lkyoung95:ai908Thlwcv6QBVH@47.186.253.135/32/Stronger'
+var ADDRESS = 'lkyoung95:ai908Thlwcv6QBVH@47.186.253.135/32/stronger'
 var db = monk(ADDRESS)
 var collection = db.get('Orders');
 
