@@ -27,7 +27,7 @@ var dotenv = require('dotenv');
 dotenv.config()
 
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5050;
 
 console.log(port)
 
