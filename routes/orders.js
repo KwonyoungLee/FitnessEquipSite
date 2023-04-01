@@ -8,8 +8,7 @@ var monk = require('monk');
 //var db = monk(ADDRESS)
 
 
-
-var ADDRESS = 'lkyoung95:ai908Thlwcv6QBVH@47.186.253.135/32/stronger'
+var ADDRESS = 'mongodb+srv://lkyoung95:ai908Thlwcv6QBVH@stronger.bxwmgqx.mongodb.net/Stronger'
 var db = monk(ADDRESS)
 var collection = db.get('Orders');
 
